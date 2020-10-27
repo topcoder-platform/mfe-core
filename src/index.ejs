@@ -46,11 +46,12 @@
   </script>
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.5.5/lib/system/single-spa.min.js" as="script">
 
-  <!-- Add your organization's prod import map URL to this script's src  -->
-  <script type="systemjs-importmap" src="/importmap-production.json"></script>
-
-  <% if (htmlWebpackPlugin.options.isLocal) { %>
-    <script type="systemjs-importmap" src="/importmap-local.json"></script>
+  <% if (htmlWebpackPlugin.options.templateParameters.env == "local") { %>
+    <script type="systemjs-importmap" src="/local.json"></script>
+  <% } else if (htmlWebpackPlugin.options.templateParameters.env == "dev") { %>
+    <script type="systemjs-importmap" src="/development.json"></script>
+  <% } else if (htmlWebpackPlugin.options.templateParameters.env == "prod") { %>
+    <script type="systemjs-importmap" src="/production.json"></script>
   <% } %>
 
   <!--
@@ -59,7 +60,7 @@
   -->
   <script src="https://cdn.jsdelivr.net/npm/zone.js@0.10.3/dist/zone.min.js"></script>
 
-  <% if (htmlWebpackPlugin.options.isLocal) { %>
+  <% if (htmlWebpackPlugin.options.templateParameters.isLocal) { %>
   <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@1.16.0/dist/import-map-overrides.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.4.0/dist/system.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.4.0/dist/extras/amd.js"></script>

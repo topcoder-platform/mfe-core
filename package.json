@@ -2,11 +2,12 @@
   "name": "@topcoder/micro-frontends-frame",
   "scripts": {
     "start": "node server.js",
-    "dev": "webpack-dev-server --mode=development --port 3000 --env.isLocal=true",
+    "local": "webpack-dev-server --mode=development --port 3000 --env.config=local",
     "lint": "eslint src --ext js",
     "test": "cross-env BABEL_ENV=test jest --passWithNoTests",
     "format": "prettier --write \"./**\"",
-    "build": "webpack --mode=production"
+    "build-dev": "webpack --mode=development --env.config=dev",
+    "build-prod": "webpack --mode=production --env.config=prod"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",

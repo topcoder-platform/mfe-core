@@ -22,8 +22,9 @@ This `micro-frontends-frame` app configs 2 things:
 
 1. URLs to all microapps it can load inside
 
-   - edit `src/public/importmap-production.json` to configure microapp names and URL to be used when deployed to production
-   - edit `src/public/importmap-local.json` to configure microapp names and URL to be used when deployed to locally
+   - edit `config/production.json` to configure microapp names and URL to be used when deployed to production environment
+   - edit `config/development.json` to configure microapp names and URL to be used when deployed to development environment
+   - edit `config/local.json` to configure microapp names and URL to be used when deployed locally
 
 2. Mapping between URL path and microapp to load by that path in `src/index.ejs`.
 
@@ -37,28 +38,29 @@ This `micro-frontends-frame` app configs 2 things:
 
 ## NPM Commands
 
-| Command          | Description                                                       |
-| ---------------- | ----------------------------------------------------------------- |
-| `npm start`      | Run server which serves production ready build from `dist` folder |
-| `npm run dev`    | Run app in the development mode                                   |
-| `npm run build`  | Build app for production and puts files to the `dist` folder      |
-| `npm run lint`   | Check code for lint errors                                        |
-| `npm run format` | Format code using prettier                                        |
-| `npm run test`   | Run unit tests                                                    |
+| Command              | Description                                                       |
+| -------------------- | ----------------------------------------------------------------- |
+| `npm start`          | Run server which serves production ready build from `dist` folder |
+| `npm run local`      | Run app in the development mode on local machine                  |
+| `npm run build-dev`  | Build app for development and puts files to the `dist` folder     |
+| `npm run build-prod` | Build app for production and puts files to the `dist` folder      |
+| `npm run lint`       | Check code for lint errors                                        |
+| `npm run format`     | Format code using prettier                                        |
+| `npm run test`       | Run unit tests                                                    |
 
 ## Local Deployment
 
 To deploy `micro-frontends-frame` app locally run inside the project root:
 
 - `npm i` to install dependencies
-- `npm run dev` to start the app on port `3000`
+- `npm run local` to start the app on port `3000`
 
 Note, that to make authorization work locally, you have to use domain `local.topcoder-dev.com` with port `3000`. So you should add into your `/etc/hosts` the line `127.0.0.1 local.topcoder-dev.com` and open app by URL http://local.topcoder-dev.com:3000.
 
 ## Deployment to Production
 
 - `npm i` - install dependencies
-- `npm run build` - build code to `dist/` folder
+- `npm run build-prod` - build code to `dist/` folder
 - Now you can host `dist/` folder using any static server with fallback to `index.html` file for any not found route. For example, you may run a simple `Express` server by running `npm start`.
 
 ### Deploying to Heroku
@@ -77,7 +79,7 @@ Make sure you have [Heroky CLI](https://devcenter.heroku.com/articles/heroku-cli
 
 For adding a child app to the root app make the following steps:
 
-1. Add child app path to importmap. User file `micro-frontends-frame/src/public/importmap-local.json` for local deployment and `micro-frontends-frame/src/public/importmap-production.json` for production:
+1. Add child app path to importmap. File underpath `micro-frontends-frame/config/local.json` for local deployment, `micro-frontends-frame/config/development.json` for development deployment and `micro-frontends-frame/config/production.json` for production deployment:
 
    React example:
 

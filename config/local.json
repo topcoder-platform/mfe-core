@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "@topcoder/micro-frontends-navbar-app": "http://localhost:8080/topcoder-micro-frontends-navbar-app.js",
+    "@topcoder/micro-frontends-react-app": "http://localhost:8500/topcoder-micro-frontends-react-app.js",
+    "@topcoder/micro-frontends-angular-app": "http://localhost:4200/main.js"
+  }
+}

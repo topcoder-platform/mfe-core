@@ -21,12 +21,15 @@ module.exports = (webpackConfigEnv) => {
         inject: false,
         template: "src/index.ejs",
         templateParameters: {
-          isLocal: webpackConfigEnv && webpackConfigEnv.isLocal === "true",
+          env: webpackConfigEnv.config,
           orgName,
         },
       }),
       new CopyWebpackPlugin({
-        patterns: [{ from: "src/public", to: "./" }],
+        patterns: [
+          { from: "src/reuse", to: "./" },
+          { from: 'config/', to: './' }
+        ],
       }),
     ],
   });
