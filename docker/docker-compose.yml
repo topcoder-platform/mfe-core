@@ -1,0 +1,10 @@
+version: '3'
+services:
+  micro-frontends-frame:
+    image: micro-frontends-frame:latest
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    env_file:
+      - api.env
+    network_mode: "host"

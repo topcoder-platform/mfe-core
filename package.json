@@ -6,8 +6,7 @@
     "lint": "eslint src --ext js",
     "test": "cross-env BABEL_ENV=test jest --passWithNoTests",
     "format": "prettier --write \"./**\"",
-    "build-dev": "webpack --mode=development --env.config=dev",
-    "build-prod": "webpack --mode=production --env.config=prod"
+    "build": "webpack --mode=${APPMODE:-development} --env.config=${APPENV:-dev}"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
