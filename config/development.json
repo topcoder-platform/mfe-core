@@ -1,7 +1,7 @@
 {
   "imports": {
-    "@topcoder/micro-frontends-navbar-app": "https://www.topcoder-dev.com/topcoder-micro-frontends-navbar-app.js",
-    "@topcoder/micro-frontends-react-app": "https://www.topcoder-dev.com/topcoder-micro-frontends-react-app.js",
-    "@topcoder/micro-frontends-angular-app": "https://www.topcoder-dev.com/main.js"
+    "@topcoder/micro-frontends-navbar-app": "https://mfe.topcoder-dev.com/navbar/topcoder-micro-frontends-navbar-app.js",
+    "@topcoder/micro-frontends-react-app": "https://mfe.topcoder-dev.com/react/topcoder-micro-frontends-react-app.js",
+    "@topcoder/micro-frontends-angular-app": "https://mfe.topcoder-dev.com/angular/main.js"
   }
 }
