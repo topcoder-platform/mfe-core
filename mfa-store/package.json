@@ -1,0 +1,37 @@
+{
+  "name": "tc-mfa-context",
+  "version": "1.0.6",
+  "description": "Topcoder microfrontend global-store/event management library",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf node_modules",
+    "lint": "tslint -c tslint.json \"src/**/*.ts\"",
+    "lint:fix": "tslint --fix -c tslint.json \"src/**/*.ts\"",
+    "rebuild": "npm run clean && npm i && npm build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "tslint --fix -c tslint.json",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "typescript": "^3.5.3",
+    "tslint": "^6.0.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "tsconfig-paths": "^3.9.0",
+    "lint-staged": "^9.4.3"
+  },
+  "dependencies": {
+    "rxjs": "^6.6.3"
+  }
+}
