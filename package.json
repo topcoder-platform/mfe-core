@@ -2,7 +2,7 @@
   "name": "@topcoder/micro-frontends-frame",
   "scripts": {
     "start": "node server.js",
-    "local": "webpack-dev-server --mode=development --port 3000 --env.config=local",
+    "local": "webpack-dev-server --mode=development --port 3000 --env.config=local --host 0.0.0.0",
     "lint": "eslint src --ext js",
     "test": "cross-env BABEL_ENV=test jest --passWithNoTests",
     "format": "prettier --write \"./**\"",
