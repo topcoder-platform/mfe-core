@@ -4,6 +4,7 @@ import {
   constructRoutes,
   constructLayoutEngine,
 } from "single-spa-layout";
+import "./reuse/global.css?modules=false";
 
 const routes = constructRoutes(document.querySelector("#single-spa-layout"));
 const applications = constructApplications({
