@@ -58,6 +58,7 @@
     If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
     Learn more about why at https://single-spa.js.org/docs/ecosystem-angular/#zonejs
   -->
+  
   <script src="https://cdn.jsdelivr.net/npm/zone.js@0.10.3/dist/zone.min.js"></script>
 
   <% if (htmlWebpackPlugin.options.templateParameters.isLocal) { %>
@@ -86,6 +87,11 @@
         </route>
         <route path="taas">
           <application name="@topcoder/micro-frontends-teams"></application>
+        </route>
+        <route path="unathorized">
+          <div style="text-align: center; padding-top: 200px; font-size: 32px;">
+            You are unathorized
+          </div>
         </route>
         <route default>
           <div style="text-align: center; padding-top: 200px; font-size: 32px;">
