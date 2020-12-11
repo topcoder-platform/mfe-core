@@ -2,11 +2,12 @@
   "name": "@topcoder/micro-frontends-frame",
   "scripts": {
     "start": "node server.js",
-    "local": "webpack-dev-server --mode=development --port 3000 --env.config=local",
+    "build": "webpack --mode=${APPMODE:-development} --env.config=${APPENV:-dev}",
+    "local-server": "nodemon ./server.js",
+    "local-client": "webpack-dev-server --mode=development --port 8080 --env.config=local",
     "lint": "eslint src --ext js",
     "test": "cross-env BABEL_ENV=test jest --passWithNoTests",
-    "format": "prettier --write \"./**\"",
-    "build": "webpack --mode=${APPMODE:-development} --env.config=${APPENV:-dev}"
+    "format": "prettier --write \"./**\""
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
@@ -33,11 +34,14 @@
     "webpack-cli": "^3.3.10",
     "webpack-config-single-spa": "^1.4.1",
     "webpack-dev-server": "^3.9.0",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "axios": "^0.21.0",
+    "path": "^0.12.7"
   },
   "dependencies": {
     "express": "^4.17.1",
     "single-spa": "^5.3.1",
-    "single-spa-layout": "1.0.0-beta.12"
+    "single-spa-layout": "1.0.0-beta.12",
+    "nodemon": "^2.0.6"
   }
 }

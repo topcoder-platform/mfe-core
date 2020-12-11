@@ -13,55 +13,113 @@ Topcoder Single Spa consist of 3 main components:
 
 ## Requirements
 
-- node - v10.22.1
-- npm - v6.14.6
+| Command              | Versions            |
+| -------------------- | ---------------------- |
+| `$ npm -v` | 6.14.6 |
+| `$ node -v` | 0.33.11 |
+| `$ nvm --version` | 0.33.11  |
+| `$ nvm current` | v10.22.1 |
 
 ## Config
 
-This `micro-frontends-frame` app configs 2 things:
+This `micro-frontends-frame` app has 2 types of configs:
 
-1. URLs to all microapps it can load inside
+1. Import mapping for the frame, containg `micro app name` and `relative url path` for each micro app. The configuration files are available on TC AWS S3 and have public access.
 
-   - edit `config/production.json` to configure microapp names and URL to be used when deployed to production environment
-   - edit `config/development.json` to configure microapp names and URL to be used when deployed to development environment
-   - edit `config/local.json` to configure microapp names and URL to be used when deployed locally
+    i. What needs to be added for a new micro-app:
+    ```json
+    {
+        "imports": {
+            "@topcoder/micro-frontends-navbar-app": "https://mfe.topcoder-dev.com/navbar/topcoder-micro-frontends-navbar-app.js",
+            "<MICRO_APP_NAME>": "<RELATIVE_URL_PATH>"
+        }
+    }
+    ```
+        
+    ii. Location of the AWS S3 files:
+    - Configure micro app names and relative URL to be used when deployed to production environment in file at location : `https://tc-platform-prod.s3.amazonaws.com/micro-frontends/micro-frontends-config-production.json`
+    - Configure micro app names and relative URL to be used when deployed to development environment in file at location : `https://tc-platform-dev.s3.amazonaws.com/micro-frontends/micro-frontends-config-development.json`
+    - Configure micro app names and relative URL to be used when deployed to local environment in file at location : `./micro-frontends-frame/config/micro-frontends-config-local.json`
+    
 
-2. Mapping between URL path and microapp to load by that path in `src/index.ejs`.
+2. Route mapping handled by the frame, containing `route path` and `micro app name` for each micro app. The configuration files are available on TC AWS S3 and have public access.
 
-   To set `<MICRO_APP_NAME>` to be loaded on `<RELATIVE_URL_PATH>` URL path, add:
-
-   ```html
-   <route path="<RELATIVE_URL_PATH>">
-     <application name="<MICRO_APP_NAME>"></application>
-   </route>
-   ```
+    i. What needs to be added for a new micro-app:
+    ```html
+    <route path="<RELATIVE_URL_PATH>">
+        <application name="<MICRO_APP_NAME>"></application>
+    </route>
+    ```
+    ii. Location of the AWS S3 files:
+    - Configure route path and micro app name to be used when deployed to production environment in file at location : `https://tc-platform-prod.s3.amazonaws.com/micro-frontends/micro-frontends-routes-production.txt`
+    - Configure route path and micro app name to be used when deployed to development environment in file at location : `https://tc-platform-dev.s3.amazonaws.com/micro-frontends/micro-frontends-routes-development.txt`
+    - Configure route path and micro app name to be used when deployed to development environment in file at location : `./micro-frontends-frame/config/micro-frontends-routes-local.txt`
+    
+⚠️ **NOTE** : When a configuration files is updated on TC AWS S3, make sure to give public access to the file.
 
 ## NPM Commands
 
-| Command              | Description                                                       |
-| -------------------- | ----------------------------------------------------------------- |
-| `npm start`          | Run server which serves production ready build from `dist` folder |
-| `npm run local`      | Run app in the development mode on local machine                  |
-| `npm run build-dev`  | Build app for development and puts files to the `dist` folder     |
-| `npm run build-prod` | Build app for production and puts files to the `dist` folder      |
-| `npm run lint`       | Check code for lint errors                                        |
-| `npm run format`     | Format code using prettier                                        |
-| `npm run test`       | Run unit tests                                                    |
+| Command              | Description            |
+| -------------------- | ---------------------- |
+| `npm start` | Run server which serves production ready build from `dist` folder |
+| `npm run build` | Build app with webpack and puts files to the `dist` folder |
+| `npm run local-server` | Run the server on local machine with nodemon |
+| `npm run local-client` | Run the frontend on local machine with webpack-dev-server |
+| `npm run lint` | Check code for lint errors |
+| `npm run format` | Format code using prettier |
+| `npm run test` | Run unit tests |
 
-## Local Deployment
+## Local Deployment from multi web servers (nodemon & webpack-dev-server) for local development
 
-To deploy `micro-frontends-frame` app locally run inside the project root:
+To deploy `micro-frontends-frame` app locally run inside the project root `./micro-frontends-frame`:
 
-- `npm i` to install dependencies
-- `npm run local` to start the app on port `3000`
+| Command              | Description            |
+| -------------------- | ---------------------- |
+| `$ export APPMODE="development"; export APPENV="local-multi"`  | to add environment variables for application building on local |
+| `$ nvm use 10.22.1` | configure the required node and npm versions via nvm |
+| `$ npm i` | to install dependencies |
+| `$ npm run local-server` | to start the app on port `3000` |
+| `$ export APPMODE="development"; export APPENV="local-multi"; nvm use 10.22.1; npm i; npm run local-client` | to start the app on port `8080` (`run in another terminal`) |
+| `http://local.topcoder-dev.com:8080/micro-frontends-react-route` | open url in browser to access the micro frame with react micro app and micro navbar app |
 
-Note, that to make authorization work locally, you have to use domain `local.topcoder-dev.com` with port `3000`. So you should add into your `/etc/hosts` the line `127.0.0.1 local.topcoder-dev.com` and open app by URL http://local.topcoder-dev.com:3000.
+⚠️ **NOTE** : for running locally, you have to use domain `local.topcoder-dev.com` with port `8080` & `3000`. On your local machine access file `/etc/hosts` add the line `127.0.0.1 local.topcoder-dev.com` and open app by URL http://local.topcoder-dev.com:8080
 
-## Deployment to Production
+## Local Deployment from web server (node)
 
-- `npm i` - install dependencies
-- `npm run build-prod` - build code to `dist/` folder
-- Now you can host `dist/` folder using any static server with fallback to `index.html` file for any not found route. For example, you may run a simple `Express` server by running `npm start`.
+To deploy `micro-frontends-frame` app locally run inside the project root `./micro-frontends-frame`:
+
+| Command              | Description            |
+| -------------------- | ---------------------- |
+| `$ export APPMODE="development"; export APPENV="local"`  | to add environment variables for application building on local |
+| `$ nvm use 10.22.1` | configure the required node and npm versions via nvm |
+| `$ npm i` | to install dependencies |
+| `$ npm run build` | to build the application and store in `dist/` |
+| `$ npm start` | to start the app on port `80`, served from `dist/` |
+| `http://local.topcoder-dev.com:3000/micro-frontends-react-route` | open url in browser to access the micro frame with react micro app and micro navbar app |
+
+⚠️ **NOTE** : that to make authorization work locally, you have to use domain `local.topcoder-dev.com` with port `3000`. On your local machine access file `/etc/hosts` add the line `127.0.0.1 local.topcoder-dev.com` and open app by URL http://local.topcoder-dev.com:3000
+
+## Deployment to Development from web server (node) port 80
+
+| Command              | Description            |
+| -------------------- | ---------------------- |
+| `$ export APPMODE="development"; export APPENV="dev"; export PORT=80`  | to add environment variables for application building on development |
+| `$ nvm use 10.22.1` | to configure the required node and npm versions via nvm |
+| `$ npm i` | to install dependencies |
+| `$ npm run build` | to build the application and store in `dist/` |
+| `$ npm start` | to start the app on port `80`, served from `dist/` |
+| `https://mfe.topcoder-dev.com/micro-frontends-react-route` | open url in browser to access the micro frame with react micro app and micro navbar app |
+
+## Deployment to Production from web server (node) port 80
+
+| Command              | Description            |
+| -------------------- | ---------------------- |
+| `$ export APPMODE="production"; export APPENV="prod"; export PORT=80`  | to add environment variables for application building on production |
+| `$ nvm use 10.22.1` | to configure the required node and npm versions via nvm |
+| `$ npm i` | to install dependencies |
+| `$ npm run build` | to build the application and store in `dist/` |
+| `$ npm start` | to start the app on port `80`, served from `dist/` |
+| `https://mfe.topcoder.com/micro-frontends-react-route` | open url in browser to access the micro frame with react micro app and micro navbar app |
 
 ### Deploying to Heroku
 
@@ -73,13 +131,16 @@ Make sure you have [Heroky CLI](https://devcenter.heroku.com/articles/heroku-cli
   - `git commit -m'inital commit'`
 - `heroku apps:create` - create Heroku app
 - `git push heroku master` - push changes to Heroku and trigger deploying
-- NOTE: Authorization would not work because only predefined list of domain allowed by `accounts-app`.
+- ⚠️ **NOTE** : Authorization would not work because only predefined list of domain allowed by `accounts-app`.
 
 ## Add/Remove child app
 
 For adding a child app to the root app make the following steps:
 
-1. Add child app path to importmap. File underpath `micro-frontends-frame/config/local.json` for local deployment, `micro-frontends-frame/config/development.json` for development deployment and `micro-frontends-frame/config/production.json` for production deployment:
+1. Add child app path to importmap. File underpath 
+- `https://tc-platform-prod.s3.amazonaws.com/micro-frontends/micro-frontends-config-production.json` for production deployment
+- `https://tc-platform-dev.s3.amazonaws.com/micro-frontends/micro-frontends-config-development.json` for development deployment
+- `./micro-frontends-frame/config/micro-frontends-config-local.json` for local deployment
 
    React example:
 
@@ -93,7 +154,10 @@ For adding a child app to the root app make the following steps:
    "@topcoder/micro-frontends-angular-app": "//localhost:4200/topcoder-micro-frontends-angular-app.js"
    ```
 
-2. Add a route which should show the app:
+2. Add a route which should show the app. File underpath 
+- `https://tc-platform-prod.s3.amazonaws.com/micro-frontends/micro-frontends-routes-production.txt` for production deployment
+- `https://tc-platform-dev.s3.amazonaws.com/micro-frontends/micro-frontends-routes-development.txt` for development deployment
+- `./micro-frontends-frame/config/micro-frontends-routes-local.txt` for local deployment
 
    ```html
    <route path="<RELATIVE_URL_PATH>">
@@ -112,14 +176,14 @@ To run a child app locally we always need to have frame (`micro-frontends-frame`
   ```
 - Reload the page, you would see the `{...}` icon in the bottom right corner.
 - Clicking it would open **Import Map Overrides** tool where you can change the URL for any loaded microapp to the local URL.
-  Note, that if the frame is deployed using `HTTPS` protocol, then you have to run microapp locally using HTTPS protocol too. For example this could be done by `npm run dev-https` command in the **Topcoder Navbar Microapp**. Also, you would have to open the local app using direct HTTPS link first to make sure that browser allows loading it.
+  ⚠️ **NOTE** : that if the frame is deployed using `HTTPS` protocol, then you have to run microapp locally using HTTPS protocol too. For example this could be done by `npm run dev-https` command in the **Topcoder Navbar Microapp**. Also, you would have to open the local app using direct HTTPS link first to make sure that browser allows loading it.
 - Now reload the page and you would see the microapp loaded into the frame from the local machine. You can update it locally and see changes in the frame which is deployed to the remote server.
 
 See video [Javascript tutorial: local development with microfrontends, single-spa, and import maps](https://www.youtube.com/watch?v=vjjcuIxqIzY&list=PLLUD8RtHvsAOhtHnyGx57EYXoaNsxGrTU) as a part of the official documentation of Single Spa.
 
 ## Creating child apps (microapps)
 
-⚠️ NOTE that once we configure React/Angular application be run as child application in Single SPA we cannot run it as standalone application anymore. So while this app can be deployed and run independently, we would need some frame [single-spa](https://single-spa.js.org/) which would load it. While technically we can achieve running this app as standalone app it's strongly not recommended by the author of the `single-spa` approch, see this [GitHub Issue](https://github.com/single-spa/single-spa/issues/640) for details.
+f that once we configure React/Angular application be run as child application in Single SPA we cannot run it as standalone application anymore. So while this app can be deployed and run independently, we would need some frame [single-spa](https://single-spa.js.org/) which would load it. While technically we can achieve running this app as standalone app it's strongly not recommended by the author of the `single-spa` approch, see this [GitHub Issue](https://github.com/single-spa/single-spa/issues/640) for details.
 
 ### Create new or use existent Angular child app
 
@@ -131,7 +195,7 @@ Any existent Angular app could be configured to be used as child app, but exact 
   ng new micro-frontends-angular-app --routing --prefix tc-ex
   ```
 
-  ⚠️ Note that the `--prefix` is important so that when you have multiple angular applications their component selectors won't have the same names.
+  ⚠️ **NOTE** : that the `--prefix` is important so that when you have multiple angular applications their component selectors won't have the same names.
 
 - Now as we have Angular app, in the root of the application run the following command which would adapt Angular app so it could be run as a child app:
 
@@ -199,7 +263,7 @@ The URL for the Angular app started this way would look like:
 //localhost:4200/micro-frontends-angular-app.js
 ```
 
-⚠️ Note, that you cannot see this Angular app a standalone app anymore, `npm start` would not work.
+⚠️ **NOTE** : that you cannot see this Angular app a standalone app anymore, `npm start` would not work.
 
 ### Create new React child app
 
@@ -223,7 +287,7 @@ The URL for the React app started this way would look like:
 //localhost:8500/topcoder-micro-frontends-react-app.js
 ```
 
-⚠️ Note, that you cannot see this React app a standalone app.
+⚠️ **NOTE** : that you cannot see this React app a standalone app.
 
 ### Use existent React child app
 

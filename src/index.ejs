@@ -46,18 +46,13 @@
   </script>
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.5.5/lib/system/single-spa.min.js" as="script">
 
-  <% if (htmlWebpackPlugin.options.templateParameters.env == "local") { %>
-    <script type="systemjs-importmap" src="/local.json"></script>
-  <% } else if (htmlWebpackPlugin.options.templateParameters.env == "dev") { %>
-    <script type="systemjs-importmap" src="/development.json"></script>
-  <% } else if (htmlWebpackPlugin.options.templateParameters.env == "prod") { %>
-    <script type="systemjs-importmap" src="/production.json"></script>
-  <% } %>
+  <script type="systemjs-importmap" src="/micro-frontends-config"></script>
 
   <!--
     If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
     Learn more about why at https://single-spa.js.org/docs/ecosystem-angular/#zonejs
   -->
+  
   <script src="https://cdn.jsdelivr.net/npm/zone.js@0.10.3/dist/zone.min.js"></script>
 
   <% if (htmlWebpackPlugin.options.templateParameters.isLocal) { %>
@@ -71,24 +66,15 @@
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.4.0/dist/extras/amd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.4.0/dist/extras/named-exports.min.js"></script>
   <% } %>
-
+  
   <template id="single-spa-layout">
     <single-spa-router>
       <nav>
         <application name="@topcoder/micro-frontends-navbar-app"></application>
       </nav>
       <div id="single-spa-main">
-        <route path="micro-frontends-react-route">
-          <application name="@topcoder/micro-frontends-react-app"></application>
-        </route>
-        <route path="micro-frontends-angular-route">
-          <application name="@topcoder/micro-frontends-angular-app"></application>
-        </route>
-        <route default>
-          <div style="text-align: center; padding-top: 200px; font-size: 32px;">
-            Welcome to Topcoder Micro Frontends
-          </div>
-        </route>
+        <!-- Routes Start -->
+        <!-- Routes End -->
       </div>
     </single-spa-router>
   </template>
