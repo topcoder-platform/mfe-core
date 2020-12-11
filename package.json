@@ -36,7 +36,8 @@
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.2.2",
     "axios": "^0.21.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "node-html-parser": "^2.0.0"
   },
   "dependencies": {
     "express": "^4.17.1",
