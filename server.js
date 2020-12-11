@@ -5,6 +5,7 @@ const path = require("path");
 const axios = require('axios');
 const fs = require('fs');
 const fsPromises = require('fs').promises;
+const htmlParse = require('node-html-parser');
 const APP_CONST = require('./config/constants');
 
 let distPath = path.resolve(__dirname, "./dist");
@@ -54,25 +55,30 @@ app.get("*", async function (req, res) {
       res.send({'error': { message: "Check application environment", code: 500 }})
       break;
   }
-  if (mfeIndex.indexOf("<!-- Routes Start -->") > -1) {
-    let mfeRoutes
-    switch (process.env.APPENV.toLowerCase()) {
-      case APP_CONST.APP_ENV_DEV.toLowerCase() :
-      case APP_CONST.APP_ENV_PROD.toLowerCase() :
-        mfeRoutes = await axios.get(env_config.mfeRoutesPath)
-        mfeRoutes = mfeRoutes.data
-        break;
-      case APP_CONST.APP_ENV_LOCAL.toLowerCase() :
-      case APP_CONST.APP_ENV_LOCAL_MULTI.toLowerCase() :
-        mfeRoutes = await fsPromises.readFile(path.join(configPath + env_config.mfeRoutesPath))
-        break;
-      default :
-        res.send({'error': { message: "Check application environment", code: 500 }})
-        break;
-    }
-    const mfe = mfeIndex.toString().replace(/<!-- Routes Start -->([\s\S]*?)<!-- Routes End -->/, "<!-- Routes Start -->" + mfeRoutes + "<!-- Routes End -->");
-    await fsPromises.writeFile(path.join(distPath + "/index.html"), mfe);
+  let mfeRoutes
+  switch (process.env.APPENV.toLowerCase()) {
+    case APP_CONST.APP_ENV_DEV.toLowerCase() :
+    case APP_CONST.APP_ENV_PROD.toLowerCase() :
+      mfeRoutes = await axios.get(env_config.mfeRoutesPath)
+      mfeRoutes = mfeRoutes.data
+      break;
+    case APP_CONST.APP_ENV_LOCAL.toLowerCase() :
+    case APP_CONST.APP_ENV_LOCAL_MULTI.toLowerCase() :
+      mfeRoutes = await fsPromises.readFile(path.join(configPath + env_config.mfeRoutesPath))
+      break;
+    default :
+      res.send({'error': { message: "Check application environment", code: 500 }})
+      break;
   }
+  let mfeIndexHtml = htmlParse.parse(mfeIndex)
+  let singleSpaMain = mfeIndexHtml.querySelector('#single-spa-main')
+  singleSpaMain.remove()
+  let singleSpaRouter = mfeIndexHtml.querySelector('single-spa-router')
+  singleSpaRouter.insertAdjacentHTML('beforeend', '<div id="single-spa-main"></div>')
+  singleSpaMain = mfeIndexHtml.querySelector('#single-spa-main')
+  singleSpaMain.insertAdjacentHTML('beforeend', mfeRoutes)
+
+  await fsPromises.writeFile(path.join(distPath + "/index.html"), mfeIndexHtml.toString());
   res.sendFile(path.join(distPath + "/index.html"));
 });
 
