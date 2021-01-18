@@ -294,3 +294,280 @@ The URL for the React app started this way would look like:
 There is no universal approach to run any React app as child app in Single SPA. This is because unlike Angular application which always use Angular CLI, each React application has it's own Webpack config. And to be able to run React app as a child microapp we need the Webpack to be configured in a certain way.
 
 - Here is Official Video form the creator of Single Spa on [How To Convert a create-react-app (CRA) project to single-spa](https://www.youtube.com/watch?v=W8oaySHuj3Y&list=PLLUD8RtHvsAOhtHnyGx57EYXoaNsxGrTU)
+
+
+
+
+
+### Checkout 4 repos and apply patches:
+- git clone https://github.com/topcoder-platform/micro-frontends-frame.git
+- git clone https://github.com/topcoder-platform/micro-frontends-navbar-app.git
+- git clone https://github.com/topcoder-platform/micro-frontends-react-app.git
+- git clone https://github.com/topcoder-platform/micro-frontends-angular-app.git
+and create a folder (ex: 'auth0-local-login'), and save the following file: 'https://accounts-auth0.topcoder-dev.com/setupAuth0WithRedirect.js' into that folder. After 'setupAuth0WithRedirect.js' file was saved, create an empty 'index.html' file with the following content:
+```
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auth0</title>
+    <meta charset="utf-8" />
+    <script language="javascript" type="text/javascript" src="./setupAuth0WithRedirect.js"></script>
+</head>
+<body>
+    Loaded...redirecting to auth0.(see browser console log)
+    <script>
+        window.onload = authSetup;
+    </script>
+    <a href="?retUrl=http://localhost:3000" >Login</a>
+</body>
+</html>
+```
+### Local deployment:
+(1). root-config: 
+open Terminal #1
+change the current dir to the root-config folder and apply patch:
+- cd micro-frontends-frame
+- git apply ../micro-frontends-frame.diff --ignore-whitespace --whitespace=nowarn
+install dependencies:
+- npm install
+build and run the app:
+- APPMODE=development APPENV=local npm run build
+- APPMODE=development APPENV=local npm run local-server
+(2). navbar-app: 
+open Terminal #2
+change the current dir to the navbar-app folder and apply patch:
+- cd micro-frontends-navbar-app
+- git apply ../micro-frontends-navbar-app.diff --ignore-whitespace --whitespace=nowarn
+there is a config file: '{navbar-app-repo}/config/development.js'. To login locally, change 'ACCOUNTS_APP_CONNECTOR', and 'AUTH' to point to the server that will be served in folder 'auth0-local-login' which was setup in the previous step.
+```
+URL: {
+ ACCOUNTS_APP_CONNECTOR: "http://localhost:5000",
+ AUTH: "http://localhost:5000"
+ ...
+}
+```
+install dependencies:
+- npm install
+build and run the app (choose 1 out of 3 ways listed bellow):
+for development build with hot-reload:
+- npm run dev
+or 
+for development build with static server:
+- APPMODE=development npm run build
+- npm start
+or
+for production build with static server:
+- npm run build
+- npm start
+NOTE:
+Default backend environment is always the dev environment. To switch to production environment, add APPENV=production before the command, ex:
+- APPENV=production npm run dev
+or
+- APPENV=production npm run build
+- npm start
+(3). react-app:
+open Terminal #3
+change the current dir to the react-app folder and apply patch:
+- cd micro-frontends-react-app
+- git apply ../micro-frontends-react-app.diff --ignore-whitespace --whitespace=nowarn
+install dependencies:
+- npm install
+build and run the app:
+- npm run dev
+(4). angular-app:
+open Terminal #4
+change the current dir to the angular-app folder and apply patch:
+- cd micro-frontends-angular-app
+- git apply ../micro-frontends-angular-app.diff --ignore-whitespace --whitespace=nowarn
+install dependencies:
+- npm install
+build and run the app:
+- npm run dev
+(5). auth0 login in local mode
+open Terminal #5
+change the current dir to the 'auth0-local-login' folder and serve with the index.htm file
+- cd auth0-local-login
+- npx http-server . -p 5000
+The app can be open at the browser url: 'http://localhost:5000' (this page will redirect to the actual page: 'http://localhost:3000')
+
+## Local deployment - handle auth redirects
+
+### Checkout 4 repos and apply patches:
+
+- git clone https://github.com/topcoder-platform/micro-frontends-frame.git
+
+- git clone https://github.com/topcoder-platform/micro-frontends-navbar-app.git
+
+- git clone https://github.com/topcoder-platform/micro-frontends-react-app.git
+
+- git clone https://github.com/topcoder-platform/micro-frontends-angular-app.git
+
+and create a folder (ex: 'auth0-local-login'), and save the following file: 'https://accounts-auth0.topcoder-dev.com/setupAuth0WithRedirect.js' into that folder. After 'setupAuth0WithRedirect.js' file was saved, create an empty 'index.html' file with the following content:
+
+```
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Auth0</title>
+
+<meta charset="utf-8" />
+
+<script language="javascript" type="text/javascript" src="./setupAuth0WithRedirect.js"></script>
+
+</head>
+
+<body>
+
+Loaded...redirecting to auth0.(see browser console log)
+
+<script>
+
+window.onload = authSetup;
+
+</script>
+
+<a href="?retUrl=http://localhost:3000" >Login</a>
+
+</body>
+
+</html>
+
+```
+
+### Local deployment:
+
+(1). root-config:
+
+open Terminal #1
+
+change the current dir to the root-config folder and apply patch:
+
+- cd micro-frontends-frame
+
+- git apply ../micro-frontends-frame.diff --ignore-whitespace --whitespace=nowarn
+
+install dependencies:
+
+- npm install
+
+build and run the app:
+
+- APPMODE=development APPENV=local npm run build
+
+- APPMODE=development APPENV=local npm run local-server
+
+(2). navbar-app:
+
+open Terminal #2
+
+change the current dir to the navbar-app folder and apply patch:
+
+- cd micro-frontends-navbar-app
+
+- git apply ../micro-frontends-navbar-app.diff --ignore-whitespace --whitespace=nowarn
+
+there is a config file: '{navbar-app-repo}/config/development.js'. To login locally, change 'ACCOUNTS_APP_CONNECTOR', and 'AUTH' to point to the server that will be served in folder 'auth0-local-login' which was setup in the previous step.
+
+```
+
+URL: {
+
+ACCOUNTS_APP_CONNECTOR: "http://localhost:5000",
+
+AUTH: "http://localhost:5000"
+
+...
+
+}
+
+```
+
+install dependencies:
+
+- npm install
+
+build and run the app (choose 1 out of 3 ways listed bellow):
+
+for development build with hot-reload:
+
+- npm run dev
+
+or
+
+for development build with static server:
+
+- APPMODE=development npm run build
+
+- npm start
+
+or
+
+for production build with static server:
+
+- npm run build
+
+- npm start
+
+NOTE:
+
+Default backend environment is always the dev environment. To switch to production environment, add APPENV=production before the command, ex:
+
+- APPENV=production npm run dev
+
+or
+
+- APPENV=production npm run build
+
+- npm start
+
+(3). react-app:
+
+open Terminal #3
+
+change the current dir to the react-app folder and apply patch:
+
+- cd micro-frontends-react-app
+
+- git apply ../micro-frontends-react-app.diff --ignore-whitespace --whitespace=nowarn
+
+install dependencies:
+
+- npm install
+
+build and run the app:
+
+- npm run dev
+
+(4). angular-app:
+
+open Terminal #4
+
+change the current dir to the angular-app folder and apply patch:
+
+- cd micro-frontends-angular-app
+
+- git apply ../micro-frontends-angular-app.diff --ignore-whitespace --whitespace=nowarn
+
+install dependencies:
+
+- npm install
+
+build and run the app:
+
+- npm run dev
+
+(5). auth0 login in local mode
+
+open Terminal #5
+
+change the current dir to the 'auth0-local-login' folder and serve with the index.htm file
+
+- cd auth0-local-login
+
+- npx http-server . -p 5000
+
+The app can be open at the browser url: 'http://localhost:5000' (this page will redirect to the actual page: 'http://localhost:3000')
