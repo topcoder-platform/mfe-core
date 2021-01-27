@@ -7,6 +7,6 @@
     "@topcoder/micro-frontends-task-marketplace-app": "http://local.topcoder-dev.com:8502/tasks/topcoder-micro-frontends-task-marketplace-app.js",
     "@topcoder/micro-frontends-earn-app": "http://local.topcoder-dev.com:8008/earn/topcoder-micro-frontends-earn-app.js",
     "@topcoder/micro-frontends-submission-review-app": "http://local.topcoder-dev.com:8503/submissionreview/topcoder-micro-frontends-submission-review-app.js",
-    "@topcoder/micro-frontends-model-app": "http://local.topcoder-dev.com:8504/model/topcoder-micro-frontends-model-app.js"
+    "@topcoder/micro-frontends-model-app": "http://local.topcoder-dev.com:8504/model-app/topcoder-micro-frontends-model-app.js"
   }
 }
