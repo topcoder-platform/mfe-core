@@ -4,6 +4,7 @@ APP_NAME=$1
 UPDATE_CACHE=""
 
 docker build -f docker/Dockerfile -t $APP_NAME:latest \
+--build-arg SEGMENT_ANALYTICS_KEY=$SEGMENT_ANALYTICS_KEY \
 --build-arg APPMODE=$APPMODE \
 --build-arg APPENV=$APPENV .
 

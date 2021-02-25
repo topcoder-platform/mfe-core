@@ -3,9 +3,12 @@ FROM node:10.22.1
 
 ARG APPMODE
 ARG APPENV
+ARG SEGMENT_ANALYTICS_KEY
+
 
 ENV APPMODE=$APPMODE
 ENV APPENV=$APPENV
+ENV SEGMENT_ANALYTICS_KEY=$SEGMENT_ANALYTICS_KEY
 
 # Copy the current directory into the Docker image
 COPY . /micro-frontends-frame
