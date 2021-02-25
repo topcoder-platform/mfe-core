@@ -35,12 +35,12 @@ This `micro-frontends-frame` app has 2 types of configs:
         }
     }
     ```
-        
+
     ii. Location of the AWS S3 files:
     - Configure micro app names and relative URL to be used when deployed to production environment in file at location : `https://tc-platform-prod.s3.amazonaws.com/micro-frontends/micro-frontends-config-production.json`
     - Configure micro app names and relative URL to be used when deployed to development environment in file at location : `https://tc-platform-dev.s3.amazonaws.com/micro-frontends/micro-frontends-config-development.json`
     - Configure micro app names and relative URL to be used when deployed to local environment in file at location : `./micro-frontends-frame/config/micro-frontends-config-local.json`
-    
+
 
 2. Route mapping handled by the frame, containing `route path` and `micro app name` for each micro app. The configuration files are available on TC AWS S3 and have public access.
 
@@ -54,7 +54,7 @@ This `micro-frontends-frame` app has 2 types of configs:
     - Configure route path and micro app name to be used when deployed to production environment in file at location : `https://tc-platform-prod.s3.amazonaws.com/micro-frontends/micro-frontends-routes-production.txt`
     - Configure route path and micro app name to be used when deployed to development environment in file at location : `https://tc-platform-dev.s3.amazonaws.com/micro-frontends/micro-frontends-routes-development.txt`
     - Configure route path and micro app name to be used when deployed to development environment in file at location : `./micro-frontends-frame/config/micro-frontends-routes-local.txt`
-    
+
 ⚠️ **NOTE** : When a configuration files is updated on TC AWS S3, make sure to give public access to the file.
 
 ## NPM Commands
@@ -133,11 +133,29 @@ Make sure you have [Heroky CLI](https://devcenter.heroku.com/articles/heroku-cli
 - `git push heroku master` - push changes to Heroku and trigger deploying
 - ⚠️ **NOTE** : Authorization would not work because only predefined list of domain allowed by `accounts-app`.
 
+## Segment Analytics
+
+Because analytics can be normally initialized once per website, we are initializing Segment Analytics inside the Frame app instead of each child app separately. See [Segment Analytics Quick Guide](https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/quickstart/).
+
+- Analytics requires `SEGMENT_ANALYTICS_KEY` to work.
+- It should be set as environment variable `SEGMENT_ANALYTICS_KEY` during running `npm run build` (for production build) or  `npm run local-client` (for local development).
+- If `SEGMENT_ANALYTICS_KEY` environment variable is not set during the build process, the Segment Analytics would not be initialized.
+- Analytics would be exposed to the `window` object as `window.analytics`. See [Segment Analytics API Guide](https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/).
+- Note, that because we can build the Frame app without analytics initialized, all the child apps which use analytics should always check if it's initialized before usage, for example like this:
+  ```js
+  if (window.analytics && typeof window.analytics.page === "function") {
+    window.analytics.page();
+  }
+  ```
+- Each child app should take care about calling `window.analytics.page()` each time the page is changed. We can pass [additional arguments](https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/#page) to this method if needed.
+- We can enable debug mode by calling `analytics.debug();` inside browser console, see [debug documentation](https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/#debug).
+- TODO: we might consider implementing one global logic for calling `window.analytics.page()` inside Frame of Navbar app so child apps wouldn't worry about this. Though we have to make sure that it works smoothly. In particular we have to make sure that if child app updates page `<title>` then `window.analytics.page()` is called after that and logs to the analytic correct page title. Also, child apps might want to provide additional arguments when calling `window.analytics.page()`. So we might come to this improvement in some time, after we try the current approach.
+
 ## Add/Remove child app
 
 For adding a child app to the root app make the following steps:
 
-1. Add child app path to importmap. File underpath 
+1. Add child app path to importmap. File underpath
 - `https://tc-platform-prod.s3.amazonaws.com/micro-frontends/micro-frontends-config-production.json` for production deployment
 - `https://tc-platform-dev.s3.amazonaws.com/micro-frontends/micro-frontends-config-development.json` for development deployment
 - `./micro-frontends-frame/config/micro-frontends-config-local.json` for local deployment
@@ -154,7 +172,7 @@ For adding a child app to the root app make the following steps:
    "@topcoder/micro-frontends-angular-app": "//localhost:4200/topcoder-micro-frontends-angular-app.js"
    ```
 
-2. Add a route which should show the app. File underpath 
+2. Add a route which should show the app. File underpath
 - `https://tc-platform-prod.s3.amazonaws.com/micro-frontends/micro-frontends-routes-production.txt` for production deployment
 - `https://tc-platform-dev.s3.amazonaws.com/micro-frontends/micro-frontends-routes-development.txt` for development deployment
 - `./micro-frontends-frame/config/micro-frontends-routes-local.txt` for local deployment

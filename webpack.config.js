@@ -1,3 +1,4 @@
+/* global process */
 const webpackMerge = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -32,6 +33,7 @@ module.exports = (webpackConfigEnv) => {
         template: "src/index.ejs",
         templateParameters: {
           env: webpackConfigEnv.config,
+          SEGMENT_ANALYTICS_KEY: process.env.SEGMENT_ANALYTICS_KEY,
           orgName,
         },
       }),
