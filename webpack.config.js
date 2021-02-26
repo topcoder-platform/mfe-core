@@ -32,8 +32,8 @@ module.exports = (webpackConfigEnv) => {
         inject: false,
         template: "src/index.ejs",
         templateParameters: {
-          env: webpackConfigEnv.config,
-          SEGMENT_ANALYTICS_KEY: process.env.SEGMENT_ANALYTICS_KEY,
+          APPENV: webpackConfigEnv.APPENV,
+          SEGMENT_ANALYTICS_KEY: webpackConfigEnv.SEGMENT_ANALYTICS_KEY,
           orgName,
         },
       }),
