@@ -7,6 +7,9 @@
 <route path="taas">
   <application name="@topcoder/micro-frontends-teams"></application>
 </route>
+<route path="taas-admin">
+  <application name="@topcoder/micro-frontends-taas-admin-app"></application>
+</route>
 <route path="task-marketplace">
   <application name="@topcoder/micro-frontends-task-marketplace-app"></application>
 </route>
