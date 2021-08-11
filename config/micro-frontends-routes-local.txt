@@ -32,6 +32,6 @@
 </route>
 <route default>
   <div style="text-align: center; padding-top: 200px; font-size: 32px;">
-    Welcome to Topcoder Micro Frontends
+    Welcome to Topcoder.com
   </div>
 </route>
