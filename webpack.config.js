@@ -18,14 +18,14 @@ module.exports = (webpackConfigEnv) => {
       historyApiFallback: true,
       hot: true,
       inline: true,
-      host: 'local.topcoder-dev.com',
+      host: "local.topcoder-dev.com",
       port: 8080,
       proxy: {
-        '*': {
-          target: 'http://local.topcoder-dev.com:3000/',
-          secure: false
-        }
-      }
+        "*": {
+          target: "http://local.topcoder-dev.com:3000/",
+          secure: false,
+        },
+      },
     },
     plugins: [
       new HtmlWebpackPlugin({
@@ -39,7 +39,14 @@ module.exports = (webpackConfigEnv) => {
       }),
       new CopyWebpackPlugin({
         patterns: [
-          { from: "src/reuse", to: "./" }
+          {
+            from: "src/reuse",
+            to: "./",
+          },
+          {
+            from: "src/images",
+            to: "./",
+          },
         ],
       }),
     ],
