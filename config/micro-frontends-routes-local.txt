@@ -32,6 +32,6 @@
 </route>
 <route default>
   <div style="text-align: center; padding-top: 200px; font-size: 32px;">
-    Welcome to Topcoder.com
+    Welcome to the Topcoder Platform. Get started by opening an app in the tool switcher on top right corner.
   </div>
 </route>
