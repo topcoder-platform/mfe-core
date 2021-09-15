@@ -26,6 +26,7 @@ module.exports = (webpackConfigEnv) => {
           secure: false,
         },
       },
+      index: '',
     },
     plugins: [
       new HtmlWebpackPlugin({
