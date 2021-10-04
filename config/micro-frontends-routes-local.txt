@@ -25,6 +25,9 @@
 <route path="community-admin">
   <application name="@topcoder/micro-frontends-community-admin-app"></application>
 </route>
+<route path="profile">
+  <application name="@topcoder/micro-frontends-profile-app"></application>
+</route>
 <route path="unauthorized">
   <div style="text-align: center; padding-top: 200px; font-size: 32px;">
     You are unauthorized
