@@ -13,6 +13,9 @@
 <route path="task-marketplace">
   <application name="@topcoder/micro-frontends-task-marketplace-app"></application>
 </route>
+<route path="forums">
+  <application name="@topcoder/micro-frontends-forums-app"></application>
+</route>
 <route path="earn">
   <application name="@topcoder/micro-frontends-earn-app"></application>
 </route>
