@@ -12,6 +12,7 @@
     "@topcoder/micro-frontends-community-admin-app": "https://tc-micro-community-admin.herokuapp.com/community-admin-app/topcoder-micro-frontends-community-admin-app.js",
     "@topcoder/micro-frontends-profile-app": "http://localhost:8009/profile-app/topcoder-micro-frontends-profile-app.js",
     "@topcoder/micro-frontends-onboarding-app": "http://localhost:8510/onboarding-app/topcoder-micro-frontends-onboarding-app.js",
-    "@topcoder/micro-frontends-forums-app": "http://localhost:8510/forums-app/topcoder-micro-frontends-forums-app.js"
+    "@topcoder/micro-frontends-forums-app": "http://localhost:8510/forums-app/topcoder-micro-frontends-forums-app.js",
+    "@topcoder/micro-frontends-self-service-app": "http://localhost:8519/self-service-app/topcoder-micro-frontends-self-service-app.js"
   }
 }
