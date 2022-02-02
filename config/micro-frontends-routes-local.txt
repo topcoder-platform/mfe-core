@@ -31,6 +31,12 @@
 <route path="onboard">
   <application name="@topcoder/micro-frontends-onboarding-app"></application>
 </route>
+<route path="forums">
+  <application name="@topcoder/micro-frontends-forums-app"></application>
+</route>
+<route path="self-service">
+  <application name="@topcoder/micro-frontends-self-service-app"></application>
+</route>
 <route path="unauthorized">
   <div style="text-align: center; padding-top: 200px; font-size: 32px;">
     You are unauthorized
