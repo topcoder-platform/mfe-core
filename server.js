@@ -29,8 +29,7 @@ app.get("/micro-frontends-config", async function (req, res) {
       mfeRoutes = await fsPromises.readFile(path.join(configPath + env_config.mfeConfigPath))
       break;
     default :
-      res.send({'error': { message: "Check application environment", code: 500 }})
-      break;
+      return res.send({'error': { message: "Check application environment", code: 500 }})
   }
   res.send(mfeRoutes);
 });
@@ -52,8 +51,7 @@ app.get("*", async function (req, res) {
       mfeIndex = mfeIndex.data
       break;
     default :
-      res.send({'error': { message: "Check application environment", code: 500 }})
-      break;
+      return res.send({'error': { message: "Check application environment", code: 500 }})
   }
   let mfeRoutes
   switch (process.env.APPENV.toLowerCase()) {
@@ -67,8 +65,7 @@ app.get("*", async function (req, res) {
       mfeRoutes = await fsPromises.readFile(path.join(configPath + env_config.mfeRoutesPath))
       break;
     default :
-      res.send({'error': { message: "Check application environment", code: 500 }})
-      break;
+      return res.send({'error': { message: "Check application environment", code: 500 }})
   }
   let mfeIndexHtml = htmlParse.parse(mfeIndex)
   let singleSpaMain = mfeIndexHtml.querySelector('#single-spa-main')
