@@ -1,26 +1,57 @@
 # Topcoder Frame Single-Spa Application (micro-frontends-frame)
 
-This is the micro-frontends-frame [single-spa](https://single-spa.js.org/) application which loads all other Topcoder micro applications.
-It always loads **Topcoder Navbar Microapp** which show the top navigation and handles authorization and loads other microapps depend on the current URL.
+This is the micro-frontends-frame [single-spa](https://single-spa.js.org/) application which loads all other Topcoder micro-frontend applications.
+It always loads **Topcoder Navbar Microapp** which provides the top-level navigation, handles authorization, and loads other microapps depend on the current URL.
 
 ## Overview
 
 Topcoder Single Spa consist of 3 main components:
 
 - This frame application which is `micro-frontends-frame` [single-spa](https://single-spa.js.org/) application. The only function of this application is to register other micro applications to load.
-- **Topcoder Navbar Microapp** - micro application which is always loaded by the frame application and shows top navigation bar and handles user authorization.
+- **Topcoder Navbar Microapp** - micro application which is always loaded by the frame application and shows the top-level navigation bar and handles user authorization.
 - Any other micro application can be loaded as main content of the overall application.
 
 ## Requirements
 
-| Command              | Versions            |
+Use the node version manager [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) to easily and safely manage the required version of NodeJS (aka, node). Download and install it per the instructions for your development operating system. Installing a version of node via `nvm` will also install `npm`.
+
+You can configure your command shell to automatically use the correct version of node based on the existence of a `.nvmrc` file in the root of the project directory. See [the nvm Github README](https://github.com/nvm-sh/nvm/blob/master/README.md#deeper-shell-integration) for more information on setting this up.
+
+You can verify the versions of `nvm`, `node`, and `npm` using the commands below.
+| Command              | Version            |
 | -------------------- | ---------------------- |
-| `$ npm -v` | 6.14.6 |
-| `$ node -v` | 0.33.11 |
-| `$ nvm --version` | 0.33.11  |
+| `$ npm -v` | 6.14.12 |
+| `$ node -v` | v10.22.1 |
+| `$ nvm --version` | 0.39.1  |
 | `$ nvm current` | v10.22.1 |
 
-## Config
+## Local Development Setup
+
+### IDE Configuration
+
+Use the [VS Code](https://code.visualstudio.com/download) IDE for MFE development.  Once installed, install the `TSLint` extension to provide Typescript linting capability. The linter will use the settings and rules as defined in the `tslint.config` file in the project's root directory. 
+
+Once the extension is installed you need to configure VS Code to use it correctly. #TODO
+
+Also, in order to use tslint from the command line, install it globally via `npm`:
+```
+$ npm i -g tslint
+```
+### Terminal Configuration
+
+The MFE Frame needs to run separate local server and client processes, each one in a separate terminal session. The navbar also needs to run its server in a terminal, along with the `local-ssl-proxy` server that will allow you to use *https* endpoints locally. Finally, each of the other micro front-end applications you want to run will also each run in their own terminal session.
+
+When developing one of the micro front-end applications you will therefore have 5 terminal sessions running at the same time:
+
+- `mfe-frame` server
+- `mfe-frame` client
+- `navbar` application
+- `local-ssl-proxy` server
+- the micro front-end app you're developing 
+
+Given this complexity, it is recommended that you use a tool like [iTerm2](https://iterm2.com) (on Mac) or an equivalent terminal shell on Windows to make terminal management simpler. iTerm2 allows you to setup a pre-defined window layout of terminal sessions, including the directory in which the session starts. With this setup, along with simple shell scripts in each project that configure and start the environment (#TODO), will allow you to get your development environment up and running quickly and easily.
+
+## Application Configuration
 
 This `micro-frontends-frame` app has 2 types of configs:
 
