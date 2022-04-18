@@ -1,6 +1,6 @@
 version: '3'
 services:
-  micro-frontends-frame:
+  mfe-core:
     image: mfe-core:latest
     build:
       context: ../
