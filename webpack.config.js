@@ -8,7 +8,7 @@ module.exports = (webpackConfigEnv) => {
   const orgName = "topcoder";
   const defaultConfig = singleSpaDefaults({
     orgName,
-    projectName: "micro-frontends-frame",
+    projectName: "mfe-core",
     webpackConfigEnv,
   });
 
