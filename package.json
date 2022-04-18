@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "single-spa": "^5.3.1",
+    "single-spa": "^5.9.3",
     "single-spa-layout": "1.0.0-beta.12",
     "nodemon": "^2.0.6"
   }
