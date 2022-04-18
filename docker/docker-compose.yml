@@ -1,7 +1,7 @@
 version: '3'
 services:
   micro-frontends-frame:
-    image: micro-frontends-frame:latest
+    image: mfe-core:latest
     build:
       context: ../
       dockerfile: docker/Dockerfile
