@@ -10,10 +10,10 @@ ENV APPENV=$APPENV
 ENV SEGMENT_ANALYTICS_KEY=$SEGMENT_ANALYTICS_KEY
 
 # Copy the current directory into the Docker image
-COPY . /micro-frontends-frame
+COPY . /mfe-core
 
 # Set working directory for future use
-WORKDIR /micro-frontends-frame
+WORKDIR /mfe-core
 
 # Install the dependencies from package.json
 RUN npm install

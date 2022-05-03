@@ -35,10 +35,10 @@
   <application name="@topcoder/micro-frontends-forums-app"></application>
 </route>
 <route path="self-service">
-  <application name="@topcoder/micro-frontends-self-service-app"></application>
+  <application name="@topcoder/mfe-customer-work"></application>
 </route>
 <route path="work">
-  <application name="@topcoder/micro-frontends-self-service-app"></application>
+  <application name="@topcoder/mfe-customer-work"></application>
 </route>
 <route path="unauthorized">
   <div style="text-align: center; padding-top: 200px; font-size: 32px;">
