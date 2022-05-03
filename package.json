@@ -1,5 +1,5 @@
 {
-  "name": "@topcoder/micro-frontends-frame",
+  "name": "@topcoder/mfe-core",
   "scripts": {
     "start": "node server.js",
     "build": "webpack --mode=${APPMODE:-development} --env.APPENV=${APPENV:-dev} --env.SEGMENT_ANALYTICS_KEY=${SEGMENT_ANALYTICS_KEY:-NS}",
