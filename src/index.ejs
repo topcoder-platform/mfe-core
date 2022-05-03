@@ -43,7 +43,7 @@
         "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.5.5/lib/system/single-spa.min.js",
         "react": "https://cdn.jsdelivr.net/npm/react@16.13.1/umd/react.production.min.js",
         "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@16.13.1/umd/react-dom.production.min.js",
-        "@topcoder/micro-frontends-frame": "/topcoder-micro-frontends-frame.js"
+        "@topcoder/mfe-core": "/topcoder-mfe-core.js"
       }
     }
   </script>
@@ -73,7 +73,7 @@
         <template id="single-spa-layout">
           <single-spa-router>
             <nav>
-              <application name="@topcoder/micro-frontends-navbar-app"></application>
+              <application name="@topcoder/mfe-header"></application>
             </nav>
             <div id="single-spa-main"></div>
           </single-spa-router>
@@ -96,7 +96,7 @@
 
 <body>
   <script>
-    System.import('@topcoder/micro-frontends-frame');
+    System.import('@topcoder/mfe-core');
   </script>
   <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
 </body>

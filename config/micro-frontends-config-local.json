@@ -1,6 +1,6 @@
 {
   "imports": {
-    "@topcoder/micro-frontends-navbar-app": "http://localhost:3001/navbar/topcoder-micro-frontends-navbar-app.js",
+    "@topcoder/mfe-header": "http://localhost:3001/navbar/topcoder-mfe-header.js",
     "@topcoder/micro-frontends-taas-admin-app": "https://platform.topcoder-dev.com/taas-admin-app/topcoder-micro-frontends-taas-admin-app.js",
     "@topcoder/micro-frontends-react-app": "https://platform.topcoder-dev.com/react/topcoder-micro-frontends-react-app.js",
     "@topcoder/micro-frontends-angular-app": "https://platform.topcoder-dev.com/angular/main.js",
@@ -13,6 +13,6 @@
     "@topcoder/micro-frontends-profile-app": "http://localhost:8009/profile-app/topcoder-micro-frontends-profile-app.js",
     "@topcoder/micro-frontends-onboarding-app": "http://localhost:8510/onboarding-app/topcoder-micro-frontends-onboarding-app.js",
     "@topcoder/micro-frontends-forums-app": "http://localhost:8510/forums-app/topcoder-micro-frontends-forums-app.js",
-    "@topcoder/micro-frontends-self-service-app": "http://localhost:8519/self-service-app/topcoder-micro-frontends-self-service-app.js"
+    "@topcoder/mfe-customer-work": "http://localhost:8519/self-service-app/topcoder-mfe-customer-work.js"
   }
 }

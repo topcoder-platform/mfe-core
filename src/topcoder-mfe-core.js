@@ -17,7 +17,7 @@ const layoutEngine = constructLayoutEngine({ routes, applications });
 
 applications.forEach(registerApplication);
 
-System.import("@topcoder/micro-frontends-navbar-app").then(() => {
+System.import("@topcoder/mfe-header").then(() => {
   // Activate the layout engine once navbar is loaded
   layoutEngine.activate();
   start();
