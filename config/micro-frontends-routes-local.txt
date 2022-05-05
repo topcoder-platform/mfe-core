@@ -40,6 +40,9 @@
 <route path="work">
   <application name="@topcoder/mfe-customer-work"></application>
 </route>
+<route path="account">
+  <application name="@topcoder/mfe-customer-work"></application>
+</route>
 <route path="unauthorized">
   <div style="text-align: center; padding-top: 200px; font-size: 32px;">
     You are unauthorized
