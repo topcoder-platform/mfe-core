@@ -38,7 +38,7 @@
   <application name="@topcoder/mfe-customer-work"></application>
 </route>
 <route path="work">
-  <application name="@topcoder/micro-frontends-self-service-app"></application>
+  <application name="@topcoder/mfe-customer-work"></application>
 </route>
 <route path="account">
   <application name="@topcoder/mfe-customer-work"></application>
