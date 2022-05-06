@@ -49,11 +49,7 @@ module.exports = (webpackConfigEnv) => {
             to: "./",
           },
           {
-            from: "config/*development.*",
-            to: "./",
-          },
-          {
-            from: "config/*production.*",
+            from: `config/*${webpackConfigEnv.APPENV}.*`,
             to: "./",
           },
         ],
