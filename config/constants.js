@@ -2,15 +2,15 @@ module.exports = Object.freeze({
   APP_CONFIG: [
     {
       'appEnv': 'dev',
-      'mfeConfigPath': '/config/micro-frontends-config-development.json',
+      'mfeConfigPath': '/config/micro-frontends-config-dev.json',
       'mfeIndexPath': '/index.html',
-      'mfeRoutesPath': '/config/micro-frontends-routes-development.txt'
+      'mfeRoutesPath': '/config/micro-frontends-routes-dev.txt'
     },
     {
       'appEnv': 'prod',
-      'mfeConfigPath': '/config/micro-frontends-config-production.json',
+      'mfeConfigPath': '/config/micro-frontends-config-prod.json',
       'mfeIndexPath': '/index.html',
-      'mfeRoutesPath': '/config/micro-frontends-routes-production.txt'
+      'mfeRoutesPath': '/config/micro-frontends-routes-prod.txt'
     },
     {
       'appEnv': 'local-multi',
