@@ -105,3 +105,6 @@ dist
 
 # VS Code settings
 .vscode/
+
+# OS X files
+.DS_Store
