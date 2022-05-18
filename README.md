@@ -1,14 +1,14 @@
-# Topcoder Frame Single-Spa Application (micro-frontends-frame)
+# Topcoder Frame Single-Spa Application (mfe-core)
 
-This is the micro-frontends-frame [single-spa](https://single-spa.js.org/) application which loads all other Topcoder micro-frontend applications.
-It always loads **Topcoder Navbar Microapp** which provides the top-level navigation, handles authorization, and loads other microapps depend on the current URL.
+This is the mfe-core [single-spa](https://single-spa.js.org/) application which loads all other Topcoder micro applications.
+It always loads **Topcoder Navbar Microapp** which show the top navigation and handles authorization and loads other microapps depend on the current URL.
 
 ## Overview
 
 Topcoder Single Spa consist of 3 main components:
 
-- This frame application which is `micro-frontends-frame` [single-spa](https://single-spa.js.org/) application. The only function of this application is to register other micro applications to load.
-- **Topcoder Navbar Microapp** - micro application which is always loaded by the frame application and shows the top-level navigation bar and handles user authorization.
+- This frame application which is `mfe-core` [single-spa](https://single-spa.js.org/) application. The only function of this application is to register other micro applications to load.
+- **Topcoder Navbar Microapp** - micro application which is always loaded by the frame application and shows top navigation bar and handles user authorization.
 - Any other micro application can be loaded as main content of the overall application.
 
 ## Requirements
@@ -53,7 +53,7 @@ Given this complexity, it is recommended that you use a tool like [iTerm2](https
 
 ## Application Configuration
 
-This `micro-frontends-frame` app has 2 types of configs:
+This `mfe-core` app has 2 types of configs:
 
 1. Import mapping for the frame, containg `micro app name` and `relative url path` for each micro app. The configuration files are available on TC AWS S3 and have public access.
 
@@ -61,7 +61,7 @@ This `micro-frontends-frame` app has 2 types of configs:
     ```json
     {
         "imports": {
-            "@topcoder/micro-frontends-navbar-app": "https://mfe.topcoder-dev.com/navbar/topcoder-micro-frontends-navbar-app.js",
+            "@topcoder/mfe-header": "https://mfe.topcoder-dev.com/navbar/topcoder-mfe-header.js",
             "<MICRO_APP_NAME>": "<RELATIVE_URL_PATH>"
         }
     }
@@ -70,7 +70,7 @@ This `micro-frontends-frame` app has 2 types of configs:
     ii. Location of the AWS S3 files:
     - Configure micro app names and relative URL to be used when deployed to production environment in file at location : `https://tc-platform-prod.s3.amazonaws.com/micro-frontends/micro-frontends-config-production.json`
     - Configure micro app names and relative URL to be used when deployed to development environment in file at location : `https://tc-platform-dev.s3.amazonaws.com/micro-frontends/micro-frontends-config-development.json`
-    - Configure micro app names and relative URL to be used when deployed to local environment in file at location : `./micro-frontends-frame/config/micro-frontends-config-local.json`
+    - Configure micro app names and relative URL to be used when deployed to local environment in file at location : `./mfe-core/config/micro-frontends-config-local.json`
 
 
 2. Route mapping handled by the frame, containing `route path` and `micro app name` for each micro app. The configuration files are available on TC AWS S3 and have public access.
@@ -84,7 +84,7 @@ This `micro-frontends-frame` app has 2 types of configs:
     ii. Location of the AWS S3 files:
     - Configure route path and micro app name to be used when deployed to production environment in file at location : `https://tc-platform-prod.s3.amazonaws.com/micro-frontends/micro-frontends-routes-production.txt`
     - Configure route path and micro app name to be used when deployed to development environment in file at location : `https://tc-platform-dev.s3.amazonaws.com/micro-frontends/micro-frontends-routes-development.txt`
-    - Configure route path and micro app name to be used when deployed to development environment in file at location : `./micro-frontends-frame/config/micro-frontends-routes-local.txt`
+    - Configure route path and micro app name to be used when deployed to development environment in file at location : `./mfe-core/config/micro-frontends-routes-local.txt`
 
 ⚠️ **NOTE** : When a configuration files is updated on TC AWS S3, make sure to give public access to the file.
 
@@ -102,7 +102,7 @@ This `micro-frontends-frame` app has 2 types of configs:
 
 ## Local Deployment from multi web servers (nodemon & webpack-dev-server) for local development
 
-To deploy `micro-frontends-frame` app locally run inside the project root `./micro-frontends-frame`:
+To deploy `mfe-core` app locally run inside the project root `./mfe-core`:
 
 | Command              | Description            |
 | -------------------- | ---------------------- |
@@ -117,7 +117,7 @@ To deploy `micro-frontends-frame` app locally run inside the project root `./mic
 
 ## Local Deployment from web server (node)
 
-To deploy `micro-frontends-frame` app locally run inside the project root `./micro-frontends-frame`:
+To deploy `mfe-core` app locally run inside the project root `./mfe-core`:
 
 | Command              | Description            |
 | -------------------- | ---------------------- |
@@ -189,7 +189,7 @@ For adding a child app to the root app make the following steps:
 1. Add child app path to importmap. File underpath
 - `https://tc-platform-prod.s3.amazonaws.com/micro-frontends/micro-frontends-config-production.json` for production deployment
 - `https://tc-platform-dev.s3.amazonaws.com/micro-frontends/micro-frontends-config-development.json` for development deployment
-- `./micro-frontends-frame/config/micro-frontends-config-local.json` for local deployment
+- `./mfe-core/config/micro-frontends-config-local.json` for local deployment
 
    React example:
 
@@ -206,7 +206,7 @@ For adding a child app to the root app make the following steps:
 2. Add a route which should show the app. File underpath
 - `https://tc-platform-prod.s3.amazonaws.com/micro-frontends/micro-frontends-routes-production.txt` for production deployment
 - `https://tc-platform-dev.s3.amazonaws.com/micro-frontends/micro-frontends-routes-development.txt` for development deployment
-- `./micro-frontends-frame/config/micro-frontends-routes-local.txt` for local deployment
+- `./mfe-core/config/micro-frontends-routes-local.txt` for local deployment
 
    ```html
    <route path="<RELATIVE_URL_PATH>">
@@ -216,7 +216,7 @@ For adding a child app to the root app make the following steps:
 
 ## Add-hoc child app replacement (import override)
 
-To run a child app locally we always need to have frame (`micro-frontends-frame`) which would load a child app. But the cool thing is that we don't have to deploy the frame locally and we can use already deployed frame app. We can use a dev tool to override a child app URL so it would be loaded from the local machine by following the next steps:
+To run a child app locally we always need to have frame (`mfe-core`) which would load a child app. But the cool thing is that we don't have to deploy the frame locally and we can use already deployed frame app. We can use a dev tool to override a child app URL so it would be loaded from the local machine by following the next steps:
 
 - Load already deployed frame app in the browser.
 - Open browser console and set `devtools` flag in the local storage by executing the next command:
@@ -349,8 +349,8 @@ There is no universal approach to run any React app as child app in Single SPA. 
 
 
 ### Checkout 4 repos and apply patches:
-- git clone https://github.com/topcoder-platform/micro-frontends-frame.git
-- git clone https://github.com/topcoder-platform/micro-frontends-navbar-app.git
+- git clone https://github.com/topcoder-platform/mfe-core.git
+- git clone https://github.com/topcoder-platform/mfe-header.git
 - git clone https://github.com/topcoder-platform/micro-frontends-react-app.git
 - git clone https://github.com/topcoder-platform/micro-frontends-angular-app.git
 and create a folder (ex: 'auth0-local-login'), and save the following file: 'https://accounts-auth0.topcoder-dev.com/setupAuth0WithRedirect.js' into that folder. After 'setupAuth0WithRedirect.js' file was saved, create an empty 'index.html' file with the following content:
@@ -375,8 +375,8 @@ and create a folder (ex: 'auth0-local-login'), and save the following file: 'htt
 (1). root-config: 
 open Terminal #1
 change the current dir to the root-config folder and apply patch:
-- cd micro-frontends-frame
-- git apply ../micro-frontends-frame.diff --ignore-whitespace --whitespace=nowarn
+- cd mfe-core
+- git apply ../mfe-core.diff --ignore-whitespace --whitespace=nowarn
 install dependencies:
 - npm install
 build and run the app:
@@ -385,8 +385,8 @@ build and run the app:
 (2). navbar-app: 
 open Terminal #2
 change the current dir to the navbar-app folder and apply patch:
-- cd micro-frontends-navbar-app
-- git apply ../micro-frontends-navbar-app.diff --ignore-whitespace --whitespace=nowarn
+- cd mfe-header
+- git apply ../mfe-header.diff --ignore-whitespace --whitespace=nowarn
 there is a config file: '{navbar-app-repo}/config/development.js'. To login locally, change 'ACCOUNTS_APP_CONNECTOR', and 'AUTH' to point to the server that will be served in folder 'auth0-local-login' which was setup in the previous step.
 ```
 URL: {
@@ -443,9 +443,9 @@ The app can be open at the browser url: 'http://localhost:5000' (this page will 
 
 ### Checkout 4 repos and apply patches:
 
-- git clone https://github.com/topcoder-platform/micro-frontends-frame.git
+- git clone https://github.com/topcoder-platform/mfe-core.git
 
-- git clone https://github.com/topcoder-platform/micro-frontends-navbar-app.git
+- git clone https://github.com/topcoder-platform/mfe-header.git
 
 - git clone https://github.com/topcoder-platform/micro-frontends-react-app.git
 
@@ -495,9 +495,9 @@ open Terminal #1
 
 change the current dir to the root-config folder and apply patch:
 
-- cd micro-frontends-frame
+- cd mfe-core
 
-- git apply ../micro-frontends-frame.diff --ignore-whitespace --whitespace=nowarn
+- git apply ../mfe-core.diff --ignore-whitespace --whitespace=nowarn
 
 install dependencies:
 
@@ -515,9 +515,9 @@ open Terminal #2
 
 change the current dir to the navbar-app folder and apply patch:
 
-- cd micro-frontends-navbar-app
+- cd mfe-header
 
-- git apply ../micro-frontends-navbar-app.diff --ignore-whitespace --whitespace=nowarn
+- git apply ../mfe-header.diff --ignore-whitespace --whitespace=nowarn
 
 there is a config file: '{navbar-app-repo}/config/development.js'. To login locally, change 'ACCOUNTS_APP_CONNECTOR', and 'AUTH' to point to the server that will be served in folder 'auth0-local-login' which was setup in the previous step.
 
