@@ -22,7 +22,7 @@ module.exports = (webpackConfigEnv) => {
       port: 8080,
       proxy: {
         "*": {
-          target: "http://local.topcoder-dev.com:3000/",
+          target: "http://local.topcoder-dev.com:6000/",
           secure: false,
         },
       },

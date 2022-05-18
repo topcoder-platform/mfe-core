@@ -79,6 +79,6 @@ app.get("*", async function (req, res) {
   res.sendFile(path.join(distPath + "/index.html"));
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 6000;
 app.listen(PORT);
 console.log(`App is hosted on port ${PORT}.`); // eslint-disable-line no-console
