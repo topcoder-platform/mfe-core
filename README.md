@@ -63,7 +63,7 @@ When developing one of the micro front-end applications you will therefore have 
 - `local-ssl-proxy` server
 - the MFE app you're developing 
 
-Given this complexity, it is recommended that you use a tool like [iTerm2](https://iterm2.com) (on Mac) or an equivalent terminal shell on Windows to make terminal management simpler. iTerm2 allows you to setup a pre-defined window layout of terminal sessions, including the directory in which the session starts. With this setup, along with simple shell scripts in each project that configure and start the environment (#TODO), will allow you to get your development environment up and running quickly and easily.
+Given this complexity, it is recommended that you use a tool like [iTerm2](https://iterm2.com) (on Mac) or an equivalent terminal shell on Windows to make terminal management simpler. iTerm2 allows you to setup a pre-defined window layout of terminal sessions, including the directory in which the session starts. This setup, along with simple shell scripts in each project that configure and start the environment, will allow you to get your development environment up and running quickly and easily.
 
 ### Linting
 We use linting to enforce standardization. Please make sure all lint rules pass before creating PRs. 
@@ -131,6 +131,8 @@ This `mfe-core` app has 2 types of configs:
 | Command              | Description            |
 | -------------------- | ---------------------- |
 | `npm start` | Run server which serves production ready build from `dist` folder |
+| `npm run start-server` | Run server locally for local development (calls on local-server npm script) |
+| `npm run start-client` | Run client locally for local development (calls on local-client npm script) |
 | `npm run build` | Build app with webpack and puts files to the `dist` folder |
 | `npm run local-server` | Run the server on local machine with nodemon |
 | `npm run local-client` | Run the frontend on local machine with webpack-dev-server |
@@ -138,20 +140,19 @@ This `mfe-core` app has 2 types of configs:
 | `npm run format` | Format code using prettier |
 | `npm run test` | Run unit tests |
 
-## Local Deployment from multi web servers (nodemon & webpack-dev-server) for local development
+## Local Deployment from multi web servers (nodemon & webpack-dev-server) for local development - (most common)
 
-To deploy `mfe-core` app locally run inside the project root `./mfe-core`:
+To run the `mfe-core` app locally, run the following commands from the project root `./mfe-core`:
 
-| Command              | Description            |
-| -------------------- | ---------------------- |
-| `$ export APPMODE="development"; export APPENV="local-multi"`  | to add environment variables for application building on local |
-| `$ nvm use 10.22.1` | configure the required node and npm versions via nvm |
-| `$ npm i` | to install dependencies |
-| `$ npm run local-server` | to start the app on port `3000` |
-| `$ export APPMODE="development"; export APPENV="local-multi"; nvm use 10.22.1; npm i; npm run local-client` | to start the app on port `8080` (`run in another terminal`) |
-| `http://local.topcoder-dev.com:8080/micro-frontends-react-route` | open url in browser to access the micro frame with react micro app and micro navbar app |
+Terminal 1
+```
+$ npm run start-server
+```
 
-⚠️ **NOTE** : for running locally, you have to use domain `local.topcoder-dev.com` with port `8080` & `3000`. On your local machine access file `/etc/hosts` add the line `127.0.0.1 local.topcoder-dev.com` and open app by URL http://local.topcoder-dev.com:8080
+Terminal 2
+```
+$ npm run start-client
+```
 
 ## Local Deployment from web server (node)
 
