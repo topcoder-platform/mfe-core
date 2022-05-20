@@ -2,6 +2,8 @@
   "name": "@topcoder/mfe-core",
   "scripts": {
     "start": "node server.js",
+    "start-server": "sh start-server.sh",
+    "start-client": "sh start-client.sh",
     "build": "webpack --mode=${APPMODE:-development} --env.APPENV=${APPENV:-dev} --env.SEGMENT_ANALYTICS_KEY=${SEGMENT_ANALYTICS_KEY:-NS}",
     "local-server": "nodemon ./server.js",
     "local-client": "webpack-dev-server --mode=development --port 8080 --env.APPENV=local",
