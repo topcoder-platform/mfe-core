@@ -1,6 +1,3 @@
-<route path="academy">
-  <application name="@topcoder/mfe-customer-work"></application>
-</route>
 <route path="account">
   <application name="@topcoder/mfe-customer-work"></application>
 </route>
@@ -12,6 +9,9 @@
 </route>
 <route path="forums">
   <application name="@topcoder/micro-frontends-forums-app"></application>
+</route>
+<route path="learn">
+  <application name="@topcoder/mfe-customer-work"></application>
 </route>
 <route path="micro-frontends-angular-route">
   <application name="@topcoder/micro-frontends-angular-app"></application>
