@@ -2,15 +2,15 @@ module.exports = Object.freeze({
   APP_CONFIG: [
     {
       'appEnv': 'dev',
-      'mfeConfigPath': 'https://tc-public-static-files.topcoder-dev.com/micro-frontends/micro-frontends-config-development.json',
+      'mfeConfigPath': '/config/micro-frontends-config-dev.json',
       'mfeIndexPath': '/index.html',
-      'mfeRoutesPath': 'https://tc-public-static-files.topcoder-dev.com/micro-frontends/micro-frontends-routes-development.txt'
+      'mfeRoutesPath': '/config/micro-frontends-routes-dev.txt'
     },
     {
       'appEnv': 'prod',
-      'mfeConfigPath': 'https://tc-public-static-files.topcoder.com/micro-frontends/micro-frontends-config-production.json',
+      'mfeConfigPath': '/config/micro-frontends-config-prod.json',
       'mfeIndexPath': '/index.html',
-      'mfeRoutesPath': 'https://tc-public-static-files.topcoder.com/micro-frontends/micro-frontends-routes-production.txt'
+      'mfeRoutesPath': '/config/micro-frontends-routes-prod.txt'
     },
     {
       'appEnv': 'local-multi',
