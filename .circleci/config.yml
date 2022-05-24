@@ -74,8 +74,9 @@ workflows:
           filters:
             branches:
               only:
-                - dev
-                - feat/onboarding-app
+                # - dev
+                # - feat/onboarding-app
+                - qa
 
       # Production builds are exectuted only on tagged commits to the
       # master branch.
