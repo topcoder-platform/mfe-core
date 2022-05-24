@@ -1,26 +1,95 @@
 # Topcoder Frame Single-Spa Application (mfe-core)
 
-This is the mfe-core [single-spa](https://single-spa.js.org/) application which loads all other Topcoder micro applications.
-It always loads **Topcoder Navbar Microapp** which show the top navigation and handles authorization and loads other microapps depend on the current URL.
+This is the mfe-core [single-spa](https://single-spa.js.org/) application which loads all other Topcoder micro-frontend (MFE) applications.
+It always loads the **Topcoder Header Microapp** which provides the top-level navigation, handles authorization, and loads other microapps depending on the current URL.
 
 ## Overview
 
 Topcoder Single Spa consist of 3 main components:
 
-- This frame application which is `mfe-core` [single-spa](https://single-spa.js.org/) application. The only function of this application is to register other micro applications to load.
-- **Topcoder Navbar Microapp** - micro application which is always loaded by the frame application and shows top navigation bar and handles user authorization.
+- This frame application, `mfe-core`, which is a [single-spa](https://single-spa.js.org/) application. The only function of this application is to register other micro applications to load.
+- **Topcoder Header Microapp** - micro application which is always loaded by the frame application and shows the top-level navigation bar and handles user authorization.
 - Any other micro application can be loaded as main content of the overall application.
 
 ## Requirements
 
-| Command              | Versions            |
-| -------------------- | ---------------------- |
-| `$ npm -v` | 6.14.6 |
-| `$ node -v` | 0.33.11 |
-| `$ nvm --version` | 0.33.11  |
-| `$ nvm current` | v10.22.1 |
+Use the node version manager [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) to easily and safely manage the required version of NodeJS (aka, node). Download and install it per the instructions for your development operating system. Installing a version of node via `nvm` will also install `npm`.
 
-## Config
+Once nvm is installed, run: 
+```
+$ nvm install <insert node version>
+```
+
+>Note: the node version required at the time of this writing is `10.22.1`
+
+At the root of the project directory you'll notice a file called `.nvmrc` which specifies the node version used by the project. The command `nvm use` will use the version specified in the file if no version is supplied on the command line. 
+See [the nvm Github README](https://github.com/nvm-sh/nvm/blob/master/README.md#nvmrc) for more information on setting this up.
+
+You can verify the versions of `nvm`, `node`, and `npm` using the commands below.
+| Command           | Version  |
+| ----------------- | -------- |
+| `$ npm -v`        | 6.14.12  |
+| `$ node -v`       | v10.22.1 |
+| `$ nvm --version` | 0.39.1   |
+| `$ nvm current`   | v10.22.1 |
+
+## Local Development Setup
+
+### IDE
+
+Use the [VS Code](https://code.visualstudio.com/download) IDE for MFE development.
+
+### Hosting 
+You will need to add the following line to your hosts file. The hosts file is normally located at `/etc/hosts` (Mac). Do not overwrite the existing localhost entry also pointing to 127.0.0.1
+
+```
+127.0.0.1      local.topcoder-dev.com
+```
+
+The MFE can run in a non-ssl environment, but auth0 will complain and throw errors. In order to bypass this, you will need to install [local-ssl-proxy](https://www.npmjs.com/package/local-ssl-proxy) to run the site in ssl. The following command will install it globally:
+```
+$ npm i -g local-ssl-proxy
+```
+
+### Terminal Configuration
+
+The MFE Core Frame needs to run separate local server and client processes, each one in a separate terminal session. The navbar also needs to run its server in a terminal, along with the `local-ssl-proxy` server that will allow you to use *https* endpoints locally. Finally, each of the other micro front-end applications you want to run will also each run in their own terminal session.
+
+When developing one of the micro front-end applications you will therefore have 5 terminal sessions running at the same time:
+
+- `mfe-core` server
+- `mfe-core` client
+- `mfe-header` application
+- `local-ssl-proxy` server
+- the MFE app you're developing 
+
+Given this complexity, it is recommended that you use a tool like [iTerm2](https://iterm2.com) (on Mac) or an equivalent terminal shell on Windows to make terminal management simpler. iTerm2 allows you to setup a pre-defined window layout of terminal sessions, including the directory in which the session starts. This setup, along with simple shell scripts in each project that configure and start the environment, will allow you to get your development environment up and running quickly and easily.
+
+### Linting
+We use linting to enforce standardization. Please make sure all lint rules pass before creating PRs. 
+
+Use the following command to check for lint errors:
+```
+$ npm run lint
+``` 
+
+## Git
+### Branching
+When working on Jira tickets, we link associated Git PRs and branches to the tickets. Use the following naming convention for branches:
+
+`[TICKET #]_short-description`
+
+e.g.: `PROD-1516_work-issue`
+
+### Commits
+We use [Smart Commits](https://bigbrassband.com/git-integration-for-jira/documentation/smart-commits.html#bbb-nav-basic-examples) to link comments and time tracking to tickets. You would enter the following as your commit message:
+
+`[TICKET #] #comment <commit message> #time <jira-formatted time>`
+
+e.g.: `PLAT-001 #comment adding readme notes #time 45m`
+
+
+## Application Configuration
 
 This `mfe-core` app has 2 types of configs:
 
@@ -62,6 +131,8 @@ This `mfe-core` app has 2 types of configs:
 | Command              | Description            |
 | -------------------- | ---------------------- |
 | `npm start` | Run server which serves production ready build from `dist` folder |
+| `npm run start-server` | Run server locally for local development (calls on local-server npm script) |
+| `npm run start-client` | Run client locally for local development (calls on local-client npm script) |
 | `npm run build` | Build app with webpack and puts files to the `dist` folder |
 | `npm run local-server` | Run the server on local machine with nodemon |
 | `npm run local-client` | Run the frontend on local machine with webpack-dev-server |
@@ -69,20 +140,19 @@ This `mfe-core` app has 2 types of configs:
 | `npm run format` | Format code using prettier |
 | `npm run test` | Run unit tests |
 
-## Local Deployment from multi web servers (nodemon & webpack-dev-server) for local development
+## Local Deployment from multi web servers (nodemon & webpack-dev-server) for local development - (most common)
 
-To deploy `mfe-core` app locally run inside the project root `./mfe-core`:
+To run the `mfe-core` app locally, run the following commands from the project root `./mfe-core`:
 
-| Command              | Description            |
-| -------------------- | ---------------------- |
-| `$ export APPMODE="development"; export APPENV="local-multi"`  | to add environment variables for application building on local |
-| `$ nvm use 10.22.1` | configure the required node and npm versions via nvm |
-| `$ npm i` | to install dependencies |
-| `$ npm run local-server` | to start the app on port `3000` |
-| `$ export APPMODE="development"; export APPENV="local-multi"; nvm use 10.22.1; npm i; npm run local-client` | to start the app on port `8080` (`run in another terminal`) |
-| `http://local.topcoder-dev.com:8080/micro-frontends-react-route` | open url in browser to access the micro frame with react micro app and micro navbar app |
+Terminal 1
+```
+$ npm run start-server
+```
 
-⚠️ **NOTE** : for running locally, you have to use domain `local.topcoder-dev.com` with port `8080` & `3000`. On your local machine access file `/etc/hosts` add the line `127.0.0.1 local.topcoder-dev.com` and open app by URL http://local.topcoder-dev.com:8080
+Terminal 2
+```
+$ npm run start-client
+```
 
 ## Local Deployment from web server (node)
 
