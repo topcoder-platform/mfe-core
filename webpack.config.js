@@ -48,6 +48,10 @@ module.exports = (webpackConfigEnv) => {
             from: "src/images",
             to: "./",
           },
+          {
+            from: `config/*${webpackConfigEnv.APPENV}.*`,
+            to: "./",
+          },
         ],
       }),
     ],
