@@ -34,6 +34,9 @@
 <route path="submissionreview">
   <application name="@topcoder/micro-frontends-submission-review-app"></application>
 </route>
+<route path="support">
+  <application name="@topcoder/mfe-customer-work"></application>
+</route>
 <route path="taas">
   <application name="@topcoder/micro-frontends-teams"></application>
 </route>

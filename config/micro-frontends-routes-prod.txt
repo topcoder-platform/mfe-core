@@ -37,6 +37,9 @@
 <route path="task-marketplace">
   <application name="@topcoder/micro-frontends-task-marketplace-app"></application>
 </route>
+<route path="support">
+  <application name="@topcoder/mfe-customer-work"></application>
+</route>
 <route path="unauthorized">
   <div style="text-align: center; padding-top: 200px; font-size: 32px;">
     You are unauthorized
