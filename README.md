@@ -3,6 +3,33 @@
 This is the mfe-core [single-spa](https://single-spa.js.org/) application which loads all other Topcoder micro-frontend (MFE) applications.
 It always loads the **Topcoder Header Microapp** which provides the top-level navigation, handles authorization, and loads other microapps depending on the current URL.
 
+## Content
+
+Following are the list of sections defined in this document,
+
+- [Overview](#overview)
+- [Requirements](#requirements)
+- [Local Development Setup](#local-development-setup)
+  - [IDE](#ide)
+  - [Hosting](#hosting)
+  - [Terminal Configuration](#terminal-configuration)
+  - [Linting](#linting)
+- [Git](#git)
+  - [Branching](#branching)
+  - [Commits](#commits)
+- [Application Configuration](#application-configuration)
+- [NPM Commands](#npm-commands)
+- [Local Deployment](#local-deployment)
+- [Deployment to Development](#deployment-to-development)
+- [Deployment to Production](#deployment-to-production)
+- [Segment Analytics](#segment-analytics)
+- [Add or Remove child app](#add-or-remove-child-app)
+- [Add-hoc child app replacement (import override)](#add-hoc-child-app-replacement-import-override)
+- [Creating child apps (microapps)](#creating-child-apps-microapps)
+  - [Create new or use existent Angular child app](#create-new-or-use-existent-angular-child-app)
+  - [Create new React child app](#create-new-react-child-app)
+  - [Use existent React child app](#use-existent-react-child-app)
+
 ## Overview
 
 Topcoder Single Spa consist of 3 main components:
@@ -140,7 +167,9 @@ This `mfe-core` app has 2 types of configs:
 | `npm run format` | Format code using prettier |
 | `npm run test` | Run unit tests |
 
-## Local Deployment from multi web servers (nodemon & webpack-dev-server) for local development - (most common)
+## Local Deployment
+
+### Local Deployment from multi web servers (nodemon & webpack-dev-server) for local development - (most common)
 
 To run the `mfe-core` app locally, run the following commands from the project root `./mfe-core`:
 
@@ -154,7 +183,7 @@ Terminal 2
 $ npm run start-client
 ```
 
-## Local Deployment from web server (node)
+### Local Deployment from web server (node)
 
 To deploy `mfe-core` app locally run inside the project root `./mfe-core`:
 
@@ -169,7 +198,9 @@ To deploy `mfe-core` app locally run inside the project root `./mfe-core`:
 
 ⚠️ **NOTE** : that to make authorization work locally, you have to use domain `local.topcoder-dev.com` with port `3000`. On your local machine access file `/etc/hosts` add the line `127.0.0.1 local.topcoder-dev.com` and open app by URL http://local.topcoder-dev.com:3000
 
-## Deployment to Development from web server (node) port 80
+## Deployment to Development
+
+### Deployment to Development from web server (node) port 80
 
 | Command              | Description            |
 | -------------------- | ---------------------- |
@@ -180,7 +211,9 @@ To deploy `mfe-core` app locally run inside the project root `./mfe-core`:
 | `$ npm start` | to start the app on port `80`, served from `dist/` |
 | `https://mfe.topcoder-dev.com/micro-frontends-react-route` | open url in browser to access the micro frame with react micro app and micro navbar app |
 
-## Deployment to Production from web server (node) port 80
+## Deployment to Production
+
+### Deployment to Production from web server (node) port 80
 
 | Command              | Description            |
 | -------------------- | ---------------------- |
@@ -191,7 +224,7 @@ To deploy `mfe-core` app locally run inside the project root `./mfe-core`:
 | `$ npm start` | to start the app on port `80`, served from `dist/` |
 | `https://mfe.topcoder.com/micro-frontends-react-route` | open url in browser to access the micro frame with react micro app and micro navbar app |
 
-### Deploying to Heroku
+#### Deploying to Heroku
 
 Make sure you have [Heroky CLI](https://devcenter.heroku.com/articles/heroku-cli) installed and you have a Heroku account. And then inside the project folder run the next commands:
 
@@ -221,7 +254,7 @@ Because analytics can be normally initialized once per website, we are initializ
 - We can enable debug mode by calling `analytics.debug();` inside browser console, see [debug documentation](https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/#debug).
 - TODO: we might consider implementing one global logic for calling `window.analytics.page()` inside Frame of Navbar app so child apps wouldn't worry about this. Though we have to make sure that it works smoothly. In particular we have to make sure that if child app updates page `<title>` then `window.analytics.page()` is called after that and logs to the analytic correct page title. Also, child apps might want to provide additional arguments when calling `window.analytics.page()`. So we might come to this improvement in some time, after we try the current approach.
 
-## Add/Remove child app
+## Add or Remove child app
 
 For adding a child app to the root app make the following steps:
 
