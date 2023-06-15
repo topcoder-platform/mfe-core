@@ -21,6 +21,7 @@ app.get("/micro-frontends-config", async function (req, res) {
   switch (process.env.APPENV.toLowerCase()) {
     case APP_CONST.APP_ENV_PROD.toLowerCase() :
     case APP_CONST.APP_ENV_DEV.toLowerCase() :
+    case APP_CONST.APP_ENV_QA.toLowerCase() :
       mfeRoutes = await axios.get(env_config.mfeConfigPath)
       mfeRoutes = mfeRoutes.data
       break;
@@ -43,6 +44,7 @@ app.get("*", async function (req, res) {
   switch (process.env.APPENV.toLowerCase()) {
     case APP_CONST.APP_ENV_PROD.toLowerCase() :
     case APP_CONST.APP_ENV_DEV.toLowerCase() :
+    case APP_CONST.APP_ENV_QA.toLowerCase() :
     case APP_CONST.APP_ENV_LOCAL.toLowerCase() :
       mfeIndex = await fsPromises.readFile(path.join(distPath + env_config.mfeIndexPath))
       break;
@@ -56,6 +58,7 @@ app.get("*", async function (req, res) {
   let mfeRoutes
   switch (process.env.APPENV.toLowerCase()) {
     case APP_CONST.APP_ENV_DEV.toLowerCase() :
+    case APP_CONST.APP_ENV_QA.toLowerCase() :
     case APP_CONST.APP_ENV_PROD.toLowerCase() :
       mfeRoutes = await axios.get(env_config.mfeRoutesPath)
       mfeRoutes = mfeRoutes.data

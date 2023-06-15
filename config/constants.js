@@ -7,6 +7,12 @@ module.exports = Object.freeze({
       'mfeRoutesPath': '/config/micro-frontends-routes-dev.txt'
     },
     {
+      'appEnv': 'qa',
+      'mfeConfigPath': '/config/micro-frontends-config-qa.json',
+      'mfeIndexPath': '/index.html',
+      'mfeRoutesPath': '/config/micro-frontends-routes-qa.txt'
+    },    
+    {
       'appEnv': 'prod',
       'mfeConfigPath': '/config/micro-frontends-config-prod.json',
       'mfeIndexPath': '/index.html',
@@ -26,6 +32,7 @@ module.exports = Object.freeze({
     }
   ],
   APP_ENV_DEV: "dev",
+  APP_ENV_QA: "qa",  
   APP_ENV_PROD: "prod",
   APP_ENV_LOCAL_MULTI: "local-multi",
   APP_ENV_LOCAL: "local",
