@@ -10,7 +10,6 @@
     "@topcoder/micro-frontends-model-app": "https://platform.topcoder-qa.com/model-app/topcoder-micro-frontends-model-app.js",
     "@topcoder/micro-frontends-community-admin-app": "https://tc-micro-community-admin.herokuapp.com/community-admin-app/topcoder-micro-frontends-community-admin-app.js",
     "@topcoder/micro-frontends-taas-admin-app": "https://platform.topcoder-qa.com/taas-admin-app/topcoder-micro-frontends-taas-admin-app.js",
-    "@topcoder/micro-frontends-profile-app": "https://platform.topcoder-qa.com/profile-app/topcoder-micro-frontends-profile-app.js",
     "@topcoder/micro-frontends-onboarding-app": "https://platform.topcoder-qa.com/onboarding-app/topcoder-micro-frontends-onboarding-app.js",
     "@topcoder/micro-frontends-forums-app": "https://platform.topcoder-qa.com/forums-app/topcoder-micro-frontends-forums-app.js",    
     "@topcoder/mfe-customer-work": "https://platform.topcoder-qa.com/self-service-app/topcoder-mfe-customer-work.js"
