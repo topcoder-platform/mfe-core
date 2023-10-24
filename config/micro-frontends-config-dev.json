@@ -3,7 +3,6 @@
     "@topcoder/mfe-header": "https://platform.topcoder-dev.com/navbar/topcoder-mfe-header.js",
     "@topcoder/micro-frontends-react-app": "https://platform.topcoder-dev.com/react/topcoder-micro-frontends-react-app.js",
     "@topcoder/micro-frontends-angular-app": "https://platform.topcoder-dev.com/angular/main.js",
-    "@topcoder/micro-frontends-teams": "https://platform.topcoder-dev.com/taas-app/topcoder-micro-frontends-teams.js",
     "@topcoder/micro-frontends-task-marketplace-app": "https://platform.topcoder-dev.com/tasks/topcoder-micro-frontends-task-marketplace-app.js",
     "@topcoder/micro-frontends-earn-app": "https://platform.topcoder-dev.com/earn-app/topcoder-micro-frontends-earn-app.js",
     "@topcoder/micro-frontends-submission-review-app": "https://platform.topcoder-dev.com/submissionreview/topcoder-micro-frontends-submission-review-app.js",
