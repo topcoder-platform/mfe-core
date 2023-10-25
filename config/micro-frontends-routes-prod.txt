@@ -22,9 +22,6 @@
 <route path="taas-admin">
   <application name="@topcoder/micro-frontends-taas-admin-app"></application>
 </route>
-<route path="profile">
-  <application name="@topcoder/micro-frontends-profile-app"></application>
-</route>
 <route path="onboard">
   <application name="@topcoder/micro-frontends-onboarding-app"></application>
 </route>
