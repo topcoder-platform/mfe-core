@@ -8,9 +8,6 @@
     "@topcoder/micro-frontends-submission-review-app": "https://platform.topcoder-dev.com/submissionreview/topcoder-micro-frontends-submission-review-app.js",
     "@topcoder/micro-frontends-model-app": "https://platform.topcoder-dev.com/model-app/topcoder-micro-frontends-model-app.js",
     "@topcoder/micro-frontends-community-admin-app": "https://tc-micro-community-admin.herokuapp.com/community-admin-app/topcoder-micro-frontends-community-admin-app.js",
-    "@topcoder/micro-frontends-taas-admin-app": "https://platform.topcoder-dev.com/taas-admin-app/topcoder-micro-frontends-taas-admin-app.js",
-    "@topcoder/micro-frontends-onboarding-app": "https://platform.topcoder-dev.com/onboarding-app/topcoder-micro-frontends-onboarding-app.js",
-    "@topcoder/micro-frontends-forums-app": "https://platform.topcoder-dev.com/forums-app/topcoder-micro-frontends-forums-app.js",    
-    "@topcoder/mfe-customer-work": "https://platform.topcoder-dev.com/self-service-app/topcoder-mfe-customer-work.js"
+    "@topcoder/micro-frontends-forums-app": "https://platform.topcoder-dev.com/forums-app/topcoder-micro-frontends-forums-app.js"
   }
 }
