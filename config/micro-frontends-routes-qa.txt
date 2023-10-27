@@ -19,26 +19,8 @@
 <route path="community-admin">
   <application name="@topcoder/micro-frontends-community-admin-app"></application>
 </route>
-<route path="taas-admin">
-  <application name="@topcoder/micro-frontends-taas-admin-app"></application>
-</route>
-<route path="onboard">
-  <application name="@topcoder/micro-frontends-onboarding-app"></application>
-</route>
 <route path="forums">
   <application name="@topcoder/micro-frontends-forums-app"></application>
-</route>
-<route path="self-service">
-  <application name="@topcoder/mfe-customer-work"></application>
-</route>
-<route path="work">
-  <application name="@topcoder/mfe-customer-work"></application>
-</route>
-<route path="account">
-  <application name="@topcoder/mfe-customer-work"></application>
-</route>
-<route path="support">
-  <application name="@topcoder/mfe-customer-work"></application>
 </route>
 <route path="unauthorized">
   <div style="text-align: center; padding-top: 200px; font-size: 32px;">
