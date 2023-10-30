@@ -25,11 +25,20 @@ save_cache_settings: &save_cache_settings
   paths:
     - node_modules
 
+build_configuration_fetch: &build_configuration_fetch
+    name: "configuring environment"
+    command: |
+        ./awsconfiguration.sh $DEPLOY_ENV
+        ./buildenv.sh -e $DEPLOY_ENV -b ${LOGICAL_ENV}-${APPNAME}-buildvar
+        aws s3 cp s3://tc-platform-${LOGICAL_ENV}/securitymanager/micro-frontends-config-${LOGICAL_ENV}.json ./config/micro-frontends-config-${LOGICAL_ENV}.json
+        aws s3 cp s3://tc-platform-${LOGICAL_ENV}/securitymanager/micro-frontends-routes-${LOGICAL_ENV}.txt ./config/micro-frontends-routes-${LOGICAL_ENV}.txt
+
 builddeploy_steps: &builddeploy_steps
   - checkout
   - setup_remote_docker
   - run: *install_dependency
   - run: *install_deploysuite
+  - run: *build_configuration_fetch
   - restore_cache: *restore_cache_settings_for_build
   - run: 
       command: |

@@ -3,16 +3,11 @@
     "@topcoder/mfe-header": "https://platform.topcoder-qa.com/navbar/topcoder-mfe-header.js",
     "@topcoder/micro-frontends-react-app": "https://platform.topcoder-qa.com/react/topcoder-micro-frontends-react-app.js",
     "@topcoder/micro-frontends-angular-app": "https://platform.topcoder-qa.com/angular/main.js",
-    "@topcoder/micro-frontends-teams": "https://platform.topcoder-qa.com/taas-app/topcoder-micro-frontends-teams.js",
     "@topcoder/micro-frontends-task-marketplace-app": "https://platform.topcoder-qa.com/tasks/topcoder-micro-frontends-task-marketplace-app.js",
     "@topcoder/micro-frontends-earn-app": "https://platform.topcoder-qa.com/earn-app/topcoder-micro-frontends-earn-app.js",
     "@topcoder/micro-frontends-submission-review-app": "https://platform.topcoder-qa.com/submissionreview/topcoder-micro-frontends-submission-review-app.js",
     "@topcoder/micro-frontends-model-app": "https://platform.topcoder-qa.com/model-app/topcoder-micro-frontends-model-app.js",
     "@topcoder/micro-frontends-community-admin-app": "https://tc-micro-community-admin.herokuapp.com/community-admin-app/topcoder-micro-frontends-community-admin-app.js",
-    "@topcoder/micro-frontends-taas-admin-app": "https://platform.topcoder-qa.com/taas-admin-app/topcoder-micro-frontends-taas-admin-app.js",
-    "@topcoder/micro-frontends-profile-app": "https://platform.topcoder-qa.com/profile-app/topcoder-micro-frontends-profile-app.js",
-    "@topcoder/micro-frontends-onboarding-app": "https://platform.topcoder-qa.com/onboarding-app/topcoder-micro-frontends-onboarding-app.js",
-    "@topcoder/micro-frontends-forums-app": "https://platform.topcoder-qa.com/forums-app/topcoder-micro-frontends-forums-app.js",    
-    "@topcoder/mfe-customer-work": "https://platform.topcoder-qa.com/self-service-app/topcoder-mfe-customer-work.js"
+    "@topcoder/micro-frontends-forums-app": "https://platform.topcoder-qa.com/forums-app/topcoder-micro-frontends-forums-app.js"
   }
 }
